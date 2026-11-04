@@ -1,0 +1,593 @@
+/* ========================================================
+   TERMINAL INTERACTIVA - ESTILOS HACKER / DEV GLASSMORPHIC
+   ======================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+:root {
+  --term-font: 'JetBrains Mono', 'Fira Code', 'Roboto Mono', monospace;
+  --term-bg: rgba(10, 15, 29, 0.88);
+  --term-border: rgba(6, 182, 212, 0.3);
+  --term-glow: rgba(6, 182, 212, 0.2);
+  --neon-cyan: #22d3ee;
+  --neon-green: #4ade80;
+  --neon-purple: #c084fc;
+  --neon-yellow: #fbbf24;
+  --neon-red: #f87171;
+  --neon-blue: #60a5fa;
+}
+
+/* Modo de tema alternativo: Matrix Green */
+.theme-matrix {
+  --term-border: rgba(34, 197, 94, 0.35);
+  --term-glow: rgba(34, 197, 94, 0.25);
+  --neon-cyan: #4ade80;
+  --neon-green: #22c55e;
+}
+
+/* Modo de tema alternativo: Synthwave */
+.theme-synthwave {
+  --term-border: rgba(217, 70, 239, 0.35);
+  --term-glow: rgba(217, 70, 239, 0.25);
+  --neon-cyan: #f472b6;
+  --neon-green: #38bdf8;
+}
+
+/* Contenedor Hero de la Terminal (Full Screen 100vw x 100vh) */
+#terminal-section,
+.terminal-container,
+.terminal-hero-section {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  min-height: 100vh;
+  max-width: 100vw;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 1rem;
+  background: radial-gradient(circle at 50% 20%, rgba(14, 116, 144, 0.15) 0%, rgba(15, 23, 42, 0.98) 75%), #090d16;
+  color: #f1f5f9;
+  overflow: hidden;
+}
+
+/* Fondo decorativo con rejilla cibernética sutil */
+.terminal-hero-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 36px 36px;
+  pointer-events: none;
+  mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.8) 0%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.8) 0%, transparent 80%);
+}
+
+/* Resplandor ambiental de fondo */
+.terminal-glow-orb {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  filter: blur(100px);
+  pointer-events: none;
+  opacity: 0.35;
+  animation: floatOrb 12s ease-in-out infinite alternate;
+}
+.terminal-glow-orb-1 {
+  top: 10%;
+  left: 15%;
+  background: radial-gradient(circle, #06b6d4 0%, transparent 70%);
+}
+.terminal-glow-orb-2 {
+  bottom: 10%;
+  right: 15%;
+  background: radial-gradient(circle, #6366f1 0%, transparent 70%);
+  animation-delay: -6s;
+}
+
+@keyframes floatOrb {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(40px, 30px) scale(1.15); }
+}
+
+/* Encabezado del Hero */
+.terminal-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.9rem;
+  font-family: var(--term-font);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #67e8f9;
+  background: rgba(8, 51, 68, 0.4);
+  border: 1px solid rgba(34, 211, 238, 0.3);
+  border-radius: 9999px;
+  backdrop-filter: blur(8px);
+  margin-bottom: 1rem;
+  box-shadow: 0 0 15px rgba(6, 182, 212, 0.15);
+}
+
+.terminal-hero-title {
+  font-size: 2.25rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  text-align: center;
+  margin-bottom: 0.35rem;
+  background: linear-gradient(135deg, #ffffff 30%, #a5f3fc 70%, #818cf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@media (min-width: 768px) {
+  .terminal-hero-title {
+    font-size: 3.25rem;
+  }
+}
+
+.terminal-hero-sub {
+  font-size: 0.95rem;
+  color: #94a3b8;
+  text-align: center;
+  margin-bottom: 1.75rem;
+  max-width: 600px;
+}
+
+/* ========================================================
+   VENTANA DE TERMINAL
+   ======================================================== */
+.terminal-window {
+  width: 100%;
+  max-width: 880px;
+  background: var(--term-bg);
+  border: 1px solid var(--term-border);
+  border-radius: 14px;
+  box-shadow: 
+    0 0 35px var(--term-glow),
+    0 25px 60px -15px rgba(0, 0, 0, 0.8),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  overflow: hidden;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 10;
+}
+
+/* Efecto de líneas scanline ultra sutil estilo CRT */
+.terminal-window::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0.015) 0px,
+    rgba(255, 255, 255, 0.015) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+/* Estado Maximizado */
+.terminal-window.maximized {
+  max-width: 1100px;
+}
+.terminal-window.maximized .terminal-body {
+  max-height: 640px;
+}
+
+/* Estado Minimizado */
+.terminal-window.minimized .terminal-body {
+  display: none;
+}
+
+/* Barra Superior de la Terminal */
+.terminal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  background: rgba(15, 23, 42, 0.9);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  user-select: none;
+}
+
+/* Botones estilo Mac / Linux */
+.terminal-buttons {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.terminal-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s ease, filter 0.15s ease;
+  padding: 0;
+}
+
+.terminal-dot:hover {
+  transform: scale(1.15);
+  filter: brightness(1.2);
+}
+
+.terminal-dot-close {
+  background-color: #ff5f56;
+  box-shadow: 0 0 6px rgba(255, 95, 86, 0.6);
+}
+.terminal-dot-minimize {
+  background-color: #ffbd2e;
+  box-shadow: 0 0 6px rgba(255, 189, 46, 0.6);
+}
+.terminal-dot-maximize {
+  background-color: #27c93f;
+  box-shadow: 0 0 6px rgba(39, 201, 63, 0.6);
+}
+
+.terminal-title {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--term-font);
+  font-size: 0.8rem;
+  color: #94a3b8;
+  letter-spacing: 0.02em;
+}
+
+.terminal-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--term-font);
+  font-size: 0.7rem;
+  color: #38bdf8;
+  background: rgba(14, 116, 144, 0.25);
+  border: 1px solid rgba(34, 211, 238, 0.25);
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+}
+
+/* ========================================================
+   CUERPO DE LA TERMINAL
+   ======================================================== */
+.terminal-body {
+  font-family: var(--term-font);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  padding: 1.25rem 1.25rem;
+  min-height: 380px;
+  max-height: 480px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  color: #e2e8f0;
+  cursor: text;
+  scroll-behavior: smooth;
+}
+
+@media (min-width: 640px) {
+  .terminal-body {
+    font-size: 0.925rem;
+    padding: 1.5rem 1.75rem;
+  }
+}
+
+/* Scrollbar personalizado */
+.terminal-body::-webkit-scrollbar {
+  width: 8px;
+}
+.terminal-body::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.4);
+}
+.terminal-body::-webkit-scrollbar-thumb {
+  background: rgba(34, 211, 238, 0.2);
+  border-radius: 4px;
+}
+.terminal-body::-webkit-scrollbar-thumb:hover {
+  background: rgba(34, 211, 238, 0.4);
+}
+
+/* Bloques de salida */
+.terminal-entry {
+  margin-bottom: 0.9rem;
+  animation: termFadeIn 0.2s ease-out;
+}
+
+@keyframes termFadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.terminal-cmd-echo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #f8fafc;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+}
+
+.terminal-output-block {
+  color: #cbd5e1;
+  padding-left: 0.25rem;
+  word-break: break-word;
+}
+
+/* ========================================================
+   PROMPT ACTIVO Y CURSOR
+   ======================================================== */
+.terminal-prompt-line {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  position: relative;
+  margin-top: 0.5rem;
+}
+
+.term-prompt-user {
+  color: var(--neon-cyan);
+  font-weight: 700;
+}
+.term-prompt-at {
+  color: #64748b;
+}
+.term-prompt-host {
+  color: var(--neon-green);
+  font-weight: 700;
+}
+.term-prompt-sep {
+  color: #64748b;
+}
+.term-prompt-path {
+  color: #818cf8;
+  font-weight: 600;
+}
+.term-prompt-sign {
+  color: #f43f5e;
+  font-weight: 700;
+}
+
+.terminal-input-wrapper {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.terminal-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: var(--term-font);
+  font-size: inherit;
+  color: #f8fafc;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  caret-color: var(--neon-cyan);
+}
+
+/* ========================================================
+   BOTONES DE ACCESO RÁPIDO (QUICK ACTIONS)
+   ======================================================== */
+.terminal-quick-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+  z-index: 10;
+  max-width: 880px;
+  width: 100%;
+}
+
+.terminal-quick-label {
+  font-family: var(--term-font);
+  font-size: 0.75rem;
+  color: #64748b;
+  margin-right: 0.25rem;
+}
+
+.quick-btn {
+  font-family: var(--term-font);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.4rem 0.85rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  background: rgba(15, 23, 42, 0.75);
+  color: #38bdf8;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  backdrop-filter: blur(8px);
+}
+
+.quick-btn:hover {
+  background: rgba(14, 116, 144, 0.3);
+  border-color: rgba(34, 211, 238, 0.6);
+  color: #e0f2fe;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(6, 182, 212, 0.25);
+}
+
+.quick-btn:active {
+  transform: translateY(0);
+}
+
+/* Scroll hint */
+.terminal-scroll-hint {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  font-family: var(--term-font);
+  font-size: 0.75rem;
+  color: #64748b;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  z-index: 10;
+}
+.terminal-scroll-hint:hover {
+  color: #38bdf8;
+}
+
+/* ========================================================
+   ESTILOS DE ELEMENTOS SALIDA DE COMANDOS
+   ======================================================== */
+.term-highlight {
+  color: var(--neon-cyan);
+  font-weight: 600;
+}
+.term-success {
+  color: var(--neon-green);
+  font-weight: 600;
+}
+.term-warning {
+  color: var(--neon-yellow);
+  font-weight: 600;
+}
+.term-error {
+  color: var(--neon-red);
+}
+.term-muted {
+  color: #64748b;
+}
+
+/* Enlaces clicables en la terminal */
+.term-link {
+  color: #38bdf8;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.15s ease, text-shadow 0.15s ease;
+  font-weight: 500;
+}
+.term-link:hover {
+  color: #67e8f9;
+  text-shadow: 0 0 8px rgba(34, 211, 238, 0.6);
+}
+
+/* Tablas ASCII y cuadros de texto */
+.term-table-wrapper {
+  overflow-x: auto;
+  margin: 0.5rem 0;
+  padding-bottom: 0.25rem;
+}
+.term-ascii {
+  font-family: var(--term-font);
+  white-space: pre;
+  line-height: 1.35;
+  color: #94a3b8;
+}
+
+/* Neofetch layout */
+.neofetch-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin: 0.5rem 0;
+}
+
+@media (min-width: 640px) {
+  .neofetch-container {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
+
+.neofetch-logo {
+  font-family: var(--term-font);
+  white-space: pre;
+  color: #06b6d4;
+  line-height: 1.2;
+  font-weight: 700;
+  text-shadow: 0 0 10px rgba(6, 182, 212, 0.4);
+  flex-shrink: 0;
+}
+
+.neofetch-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.neofetch-title {
+  color: #38bdf8;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.neofetch-sep {
+  color: #475569;
+  margin-bottom: 0.25rem;
+}
+
+.neofetch-row {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+}
+.neofetch-key {
+  color: #38bdf8;
+  font-weight: 600;
+  min-width: 85px;
+}
+.neofetch-val {
+  color: #e2e8f0;
+}
+
+.neofetch-palette {
+  display: flex;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+}
+.palette-box {
+  width: 14px;
+  height: 14px;
+  border-radius: 2px;
+}
+
+/* Proyectos en terminal */
+.term-project-card {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-left: 3px solid #06b6d4;
+  border-radius: 6px;
+  padding: 0.65rem 0.85rem;
+  margin: 0.5rem 0;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.term-project-card:hover {
+  transform: translateX(4px);
+  border-left-color: #38bdf8;
+  background: rgba(14, 116, 144, 0.15);
+}
+
+.term-tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  padding: 0.1rem 0.45rem;
+  border-radius: 4px;
+  background: rgba(30, 41, 59, 0.8);
+  color: #94a3b8;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  margin-right: 0.35rem;
+}
+

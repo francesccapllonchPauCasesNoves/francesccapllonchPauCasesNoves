@@ -1,3 +1,123 @@
+/* ========================================================
+   VARIABLES GLOBALES Y PALETA UNIFICADA
+   Tonos oscuros (#0f172a, #1e293b, #38bdf8, etc.)
+   ======================================================== */
+:root {
+  --color-bg-main: #0f172a;           /* Fondo principal oscuro */
+  --color-bg-card: #1e293b;           /* Fondo de tarjetas y bloques */
+  --color-bg-card-hover: #334155;     /* Estado hover de tarjetas */
+  --color-bg-elevated: rgba(30, 41, 59, 0.7); /* Contenedores translúcidos */
+  --color-primary: #38bdf8;           /* Azul cian neón */
+  --color-primary-hover: #0ea5e9;     /* Azul cian intenso */
+  --color-secondary: #818cf8;         /* Índigo complementario */
+  --color-accent: #06b6d4;            /* Acento cian terminal */
+  --color-text-main: #f8fafc;         /* Texto principal brillante */
+  --color-text-secondary: #94a3b8;   /* Texto secundario / descriptivo */
+  --color-text-muted: #64748b;       /* Texto atenuado */
+  --color-border: rgba(56, 189, 248, 0.2);     /* Borde neón sutil */
+  --color-border-subtle: rgba(148, 163, 184, 0.15); /* Borde divisor suave */
+  --color-card-border: rgba(255, 255, 255, 0.08);   /* Borde de tarjetas */
+  --color-glow: rgba(56, 189, 248, 0.25);      /* Resplandor */
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Roboto Mono', monospace;
+}
+
+body {
+  background-color: var(--color-bg-main);
+  color: var(--color-text-main);
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* ========================================================
+   TERMINAL INTERACTIVA A PANTALLA COMPLETA (100vw x 100vh)
+   ======================================================== */
+#terminal-section,
+.terminal-container,
+.terminal-hero-section {
+  width: 100vw;
+  height: 100vh;
+  min-height: 100vh;
+  max-width: 100vw;
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin: 0;
+  padding: 1.5rem;
+}
+
+/* ========================================================
+   CONTROL DE VISIBILIDAD DE BARRA DE NAVEGACIÓN
+   Transiciones fluidas .nav-hidden y .nav-visible
+   ======================================================== */
+#header {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+  will-change: transform, opacity;
+}
+
+.nav-hidden {
+  transform: translateY(-100%) !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+.nav-visible {
+  transform: translateY(0) !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+/* ========================================================
+   ANIMACIONES EXISTENTES Y PRELOADER
+   ======================================================== */
+@keyframes scroll {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(calc(-230px * 4), 0, 0);
+  }
+}
+
+@keyframes textRevealUp {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInEffect {
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-text-reveal {
+  animation: textRevealUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.preloader-hidden {
+  transform: translateY(-100%);
+}
+
+body.no-scroll {
+  overflow: hidden;
+}
+
+/* Carrusel infinito de habilidades */
 .slider {
   width: 100%;
   max-width: 800px;
@@ -21,12 +141,12 @@
 
 .slider::before {
   left: 0;
-  background: linear-gradient(to right, white 0%, transparent 100%);
+  background: linear-gradient(to right, var(--color-bg-card) 0%, transparent 100%);
 }
 
 .slider::after {
   right: 0;
-  background: linear-gradient(to left, white 0%, transparent 100%);
+  background: linear-gradient(to left, var(--color-bg-card) 0%, transparent 100%);
 }
 
 .slide-track {
@@ -35,7 +155,6 @@
   animation: scroll 15s linear infinite;
   will-change: transform;
 }
-
 
 .slide {
   width: 200px;
@@ -49,11 +168,246 @@
   white-space: nowrap;
 }
 
-@keyframes scroll {
-  0% {
-    transform: translate3d(0,0,0);
+/* ========================================================
+   SECCIÓN DE CONTACTE (#contacte) - DISPOSICIÓN RESPONSIVA
+   ======================================================== */
+#contacte {
+  background-color: var(--color-bg-main);
+  color: var(--color-text-main);
+  padding: 5rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+#contacte::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-border), transparent);
+}
+
+.contact-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.contact-header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+
+.contact-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #ffffff 30%, var(--color-primary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.75rem;
+}
+
+.contact-subtitle {
+  color: var(--color-text-secondary);
+  font-size: 1.05rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Grid responsivo: 2 columnas en desktop, 1 columna en móvil/tablet */
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+
+@media (min-width: 1024px) {
+  .contact-layout {
+    grid-template-columns: 1fr 1.25fr;
+    gap: 3.5rem;
   }
-  100% {
-    transform: translate3d(calc(-230px * 4),0,0);
+}
+
+/* Tarjetas de Información */
+.contact-cards-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.contact-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-card-border);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  backdrop-filter: blur(10px);
+}
+
+.contact-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--color-border);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4), 0 0 15px var(--color-glow);
+}
+
+.contact-card-icon {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.75rem;
+  background: rgba(56, 189, 248, 0.1);
+  border: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+.contact-card-content h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text-main);
+  margin-bottom: 0.25rem;
+}
+
+.contact-card-content p,
+.contact-card-content a {
+  color: var(--color-text-secondary);
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  word-break: break-word;
+}
+
+.contact-card-content a:hover {
+  color: var(--color-primary);
+}
+
+.contact-social-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.contact-social-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: 0.5rem;
+  background: var(--color-bg-card-hover);
+  color: var(--color-text-main);
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-decoration: none;
+  border: 1px solid var(--color-card-border);
+  transition: all 0.2s ease;
+}
+
+.contact-social-btn:hover {
+  background: rgba(56, 189, 248, 0.15);
+  border-color: var(--color-border);
+  color: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+/* Formulario de Contacto */
+.contact-form-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-card-border);
+  border-radius: 1.25rem;
+  padding: 2rem;
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(12px);
+}
+
+@media (min-width: 640px) {
+  .contact-form-card {
+    padding: 2.5rem;
   }
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-text-main);
+}
+
+.form-input,
+.form-textarea {
+  width: 100%;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid var(--color-card-border);
+  border-radius: 0.65rem;
+  padding: 0.85rem 1rem;
+  color: var(--color-text-main);
+  font-family: inherit;
+  font-size: 0.95rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  border-color: var(--color-primary);
+  background: rgba(15, 23, 42, 0.85);
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: var(--color-text-muted);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 130px;
+}
+
+.form-submit-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%);
+  color: #0f172a;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 0.95rem 1.75rem;
+  border-radius: 0.65rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3);
+  margin-top: 0.5rem;
+}
+
+.form-submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px rgba(56, 189, 248, 0.45);
+  filter: brightness(1.05);
+}
+
+.form-submit-btn:active {
+  transform: translateY(0);
 }
