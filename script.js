@@ -61,6 +61,26 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 3500);
     });
   }
+
+  // Garantía de cierre y transición del preloader
+  const preloader = document.getElementById('preloader');
+  if (preloader) {
+    // Permitir clic para saltar inmediatamente si el usuario no quiere esperar
+    preloader.addEventListener('click', () => {
+      preloader.classList.add('preloader-hidden');
+      preloader.style.display = 'none';
+      document.body.classList.remove('no-scroll');
+    });
+
+    // Cierre automático tras la animación
+    setTimeout(() => {
+      preloader.classList.add('preloader-hidden');
+      document.body.classList.remove('no-scroll');
+      setTimeout(() => {
+        preloader.style.display = 'none';
+      }, 700);
+    }, 1800);
+  }
 });
 
 const track = document.querySelector('.slider');
