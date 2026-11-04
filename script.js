@@ -1,20 +1,66 @@
 document.addEventListener('DOMContentLoaded', () => {
+  const header = document.getElementById('header');
 
-const header = document.getElementById('header');
-let lastScrollY = window.scrollY;
+  if (header) {
+    let lastScrollY = window.scrollY;
 
-window.addEventListener('scroll', () => {
-    const currentScrollY = window.scrollY;
-    if (currentScrollY > lastScrollY && currentScrollY > 20) {
-        
-        header.style.transform = 'translateY(-100%)';
-    } else {
-        
-        header.style.transform = 'translateY(0)';
-    }
-    lastScrollY = currentScrollY;
-});
+    // Inicializar estado del navbar
+    header.classList.add('nav-visible');
 
+    // Control de scroll: ocultar al bajar, mostrar al subir
+    window.addEventListener('scroll', () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY <= 20) {
+        // En la parte superior de la página siempre visible
+        header.classList.remove('nav-hidden');
+        header.classList.add('nav-visible');
+      } else if (currentScrollY > lastScrollY && currentScrollY > 60) {
+        // Scroll hacia abajo -> ocultar barra de navegación
+        header.classList.remove('nav-visible');
+        header.classList.add('nav-hidden');
+      } else if (currentScrollY < lastScrollY) {
+        // Scroll hacia arriba -> mostrar barra de navegación
+        header.classList.remove('nav-hidden');
+        header.classList.add('nav-visible');
+      }
+
+      lastScrollY = currentScrollY;
+    }, { passive: true });
+
+    // Detección de proximidad del cursor al borde superior (clientY <= 50px)
+    window.addEventListener('mousemove', (e) => {
+      if (e.clientY <= 50) {
+        header.classList.remove('nav-hidden');
+        header.classList.add('nav-visible');
+      }
+    });
+  }
+
+  // Manejo del formulario de contacto
+  const contactForm = document.getElementById('contact-form');
+  if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const submitBtn = contactForm.querySelector('.form-submit-btn');
+      const originalText = submitBtn ? submitBtn.innerHTML : '';
+
+      if (submitBtn) {
+        submitBtn.innerHTML = '<span>✓ Missatge enviat correctament!</span>';
+        submitBtn.style.background = 'linear-gradient(135deg, #10b981 0%, #34d399 100%)';
+        submitBtn.disabled = true;
+      }
+
+      setTimeout(() => {
+        contactForm.reset();
+        if (submitBtn) {
+          submitBtn.innerHTML = originalText;
+          submitBtn.style.background = '';
+          submitBtn.disabled = false;
+        }
+      }, 3500);
+    });
+  }
 });
 
 const track = document.querySelector('.slider');
@@ -66,9 +112,9 @@ window.addEventListener('load', () => {
 });
 
 function setLanguage(lang) {
-  if (!translations[lang]) lang = 'en';          
+  if (!translations[lang]) lang = 'en';
 
-  document.documentElement.lang = lang;           
+  document.documentElement.lang = lang;
 
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const text = translations[lang][el.dataset.i18n];
@@ -91,3 +137,4 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
   });
 });
+
