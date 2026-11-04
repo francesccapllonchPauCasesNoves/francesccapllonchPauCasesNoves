@@ -58,7 +58,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background-image: 
+  background-image:
     linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
   background-size: 36px 36px;
@@ -78,11 +78,13 @@
   opacity: 0.35;
   animation: floatOrb 12s ease-in-out infinite alternate;
 }
+
 .terminal-glow-orb-1 {
   top: 10%;
   left: 15%;
   background: radial-gradient(circle, #06b6d4 0%, transparent 70%);
 }
+
 .terminal-glow-orb-2 {
   bottom: 10%;
   right: 15%;
@@ -91,8 +93,13 @@
 }
 
 @keyframes floatOrb {
-  0% { transform: translate(0, 0) scale(1); }
-  100% { transform: translate(40px, 30px) scale(1.15); }
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  100% {
+    transform: translate(40px, 30px) scale(1.15);
+  }
 }
 
 /* Encabezado del Hero */
@@ -148,7 +155,7 @@
   background: var(--term-bg);
   border: 1px solid var(--term-border);
   border-radius: 14px;
-  box-shadow: 
+  box-shadow:
     0 0 35px var(--term-glow),
     0 25px 60px -15px rgba(0, 0, 0, 0.8),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
@@ -165,13 +172,11 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: repeating-linear-gradient(
-    0deg,
-    rgba(255, 255, 255, 0.015) 0px,
-    rgba(255, 255, 255, 0.015) 1px,
-    transparent 1px,
-    transparent 2px
-  );
+  background: repeating-linear-gradient(0deg,
+      rgba(255, 255, 255, 0.015) 0px,
+      rgba(255, 255, 255, 0.015) 1px,
+      transparent 1px,
+      transparent 2px);
   pointer-events: none;
   opacity: 0.7;
 }
@@ -180,6 +185,7 @@
 .terminal-window.maximized {
   max-width: 1100px;
 }
+
 .terminal-window.maximized .terminal-body {
   max-height: 640px;
 }
@@ -230,10 +236,12 @@
   background-color: #ff5f56;
   box-shadow: 0 0 6px rgba(255, 95, 86, 0.6);
 }
+
 .terminal-dot-minimize {
   background-color: #ffbd2e;
   box-shadow: 0 0 6px rgba(255, 189, 46, 0.6);
 }
+
 .terminal-dot-maximize {
   background-color: #27c93f;
   box-shadow: 0 0 6px rgba(39, 201, 63, 0.6);
@@ -290,13 +298,16 @@
 .terminal-body::-webkit-scrollbar {
   width: 8px;
 }
+
 .terminal-body::-webkit-scrollbar-track {
   background: rgba(15, 23, 42, 0.4);
 }
+
 .terminal-body::-webkit-scrollbar-thumb {
   background: rgba(34, 211, 238, 0.2);
   border-radius: 4px;
 }
+
 .terminal-body::-webkit-scrollbar-thumb:hover {
   background: rgba(34, 211, 238, 0.4);
 }
@@ -308,8 +319,15 @@
 }
 
 @keyframes termFadeIn {
-  from { opacity: 0; transform: translateY(4px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .terminal-cmd-echo {
@@ -342,20 +360,25 @@
   color: var(--neon-cyan);
   font-weight: 700;
 }
+
 .term-prompt-at {
   color: #64748b;
 }
+
 .term-prompt-host {
   color: var(--neon-green);
   font-weight: 700;
 }
+
 .term-prompt-sep {
   color: #64748b;
 }
+
 .term-prompt-path {
   color: #818cf8;
   font-weight: 600;
 }
+
 .term-prompt-sign {
   color: #f43f5e;
   font-weight: 700;
@@ -445,6 +468,7 @@
   transition: color 0.2s ease;
   z-index: 10;
 }
+
 .terminal-scroll-hint:hover {
   color: #38bdf8;
 }
@@ -456,17 +480,21 @@
   color: var(--neon-cyan);
   font-weight: 600;
 }
+
 .term-success {
   color: var(--neon-green);
   font-weight: 600;
 }
+
 .term-warning {
   color: var(--neon-yellow);
   font-weight: 600;
 }
+
 .term-error {
   color: var(--neon-red);
 }
+
 .term-muted {
   color: #64748b;
 }
@@ -479,6 +507,7 @@
   transition: color 0.15s ease, text-shadow 0.15s ease;
   font-weight: 500;
 }
+
 .term-link:hover {
   color: #67e8f9;
   text-shadow: 0 0 8px rgba(34, 211, 238, 0.6);
@@ -490,6 +519,7 @@
   margin: 0.5rem 0;
   padding-bottom: 0.25rem;
 }
+
 .term-ascii {
   font-family: var(--term-font);
   white-space: pre;
@@ -544,11 +574,13 @@
   gap: 0.5rem;
   font-size: 0.85rem;
 }
+
 .neofetch-key {
   color: #38bdf8;
   font-weight: 600;
   min-width: 85px;
 }
+
 .neofetch-val {
   color: #e2e8f0;
 }
@@ -558,6 +590,7 @@
   gap: 0.4rem;
   margin-top: 0.5rem;
 }
+
 .palette-box {
   width: 14px;
   height: 14px;
@@ -574,6 +607,7 @@
   margin: 0.5rem 0;
   transition: transform 0.2s ease, border-color 0.2s ease;
 }
+
 .term-project-card:hover {
   transform: translateX(4px);
   border-left-color: #38bdf8;
@@ -590,4 +624,3 @@
   border: 1px solid rgba(148, 163, 184, 0.2);
   margin-right: 0.35rem;
 }
-

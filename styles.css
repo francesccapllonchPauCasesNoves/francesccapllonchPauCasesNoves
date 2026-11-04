@@ -3,21 +3,36 @@
    Tonos oscuros (#0f172a, #1e293b, #38bdf8, etc.)
    ======================================================== */
 :root {
-  --color-bg-main: #0f172a;           /* Fondo principal oscuro */
-  --color-bg-card: #1e293b;           /* Fondo de tarjetas y bloques */
-  --color-bg-card-hover: #334155;     /* Estado hover de tarjetas */
-  --color-bg-elevated: rgba(30, 41, 59, 0.7); /* Contenedores translúcidos */
-  --color-primary: #38bdf8;           /* Azul cian neón */
-  --color-primary-hover: #0ea5e9;     /* Azul cian intenso */
-  --color-secondary: #818cf8;         /* Índigo complementario */
-  --color-accent: #06b6d4;            /* Acento cian terminal */
-  --color-text-main: #f8fafc;         /* Texto principal brillante */
-  --color-text-secondary: #94a3b8;   /* Texto secundario / descriptivo */
-  --color-text-muted: #64748b;       /* Texto atenuado */
-  --color-border: rgba(56, 189, 248, 0.2);     /* Borde neón sutil */
-  --color-border-subtle: rgba(148, 163, 184, 0.15); /* Borde divisor suave */
-  --color-card-border: rgba(255, 255, 255, 0.08);   /* Borde de tarjetas */
-  --color-glow: rgba(56, 189, 248, 0.25);      /* Resplandor */
+  --color-bg-main: #0f172a;
+  /* Fondo principal oscuro */
+  --color-bg-card: #1e293b;
+  /* Fondo de tarjetas y bloques */
+  --color-bg-card-hover: #334155;
+  /* Estado hover de tarjetas */
+  --color-bg-elevated: rgba(30, 41, 59, 0.7);
+  /* Contenedores translúcidos */
+  --color-primary: #38bdf8;
+  /* Azul cian neón */
+  --color-primary-hover: #0ea5e9;
+  /* Azul cian intenso */
+  --color-secondary: #818cf8;
+  /* Índigo complementario */
+  --color-accent: #06b6d4;
+  /* Acento cian terminal */
+  --color-text-main: #f8fafc;
+  /* Texto principal brillante */
+  --color-text-secondary: #94a3b8;
+  /* Texto secundario / descriptivo */
+  --color-text-muted: #64748b;
+  /* Texto atenuado */
+  --color-border: rgba(56, 189, 248, 0.2);
+  /* Borde neón sutil */
+  --color-border-subtle: rgba(148, 163, 184, 0.15);
+  /* Borde divisor suave */
+  --color-card-border: rgba(255, 255, 255, 0.08);
+  /* Borde de tarjetas */
+  --color-glow: rgba(56, 189, 248, 0.25);
+  /* Resplandor */
   --font-mono: 'JetBrains Mono', 'Fira Code', 'Roboto Mono', monospace;
 }
 
@@ -78,6 +93,7 @@ body {
   0% {
     transform: translate3d(0, 0, 0);
   }
+
   100% {
     transform: translate3d(calc(-230px * 4), 0, 0);
   }
@@ -88,6 +104,7 @@ body {
     transform: translateY(100%);
     opacity: 0;
   }
+
   100% {
     transform: translateY(0%);
     opacity: 1;
@@ -99,6 +116,7 @@ body {
     transform: translateY(20px);
     opacity: 0;
   }
+
   100% {
     transform: translateY(0);
     opacity: 1;
