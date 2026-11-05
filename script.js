@@ -47,7 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (submitBtn) {
         submitBtn.innerHTML = '<span>✓ Missatge enviat correctament!</span>';
-        submitBtn.style.background = 'linear-gradient(135deg, #10b981 0%, #34d399 100%)';
+        submitBtn.style.background = '#CFC7B8';
+        submitBtn.style.color = '#2C2825';
         submitBtn.disabled = true;
       }
 

@@ -133,7 +133,7 @@
   function typeWriterLine(formattedText, charDelay = 20) {
     return new Promise((resolve) => {
       const lineDiv = document.createElement('div');
-      lineDiv.className = 'terminal-entry text-slate-300';
+      lineDiv.className = 'terminal-entry text-[#2C2825]';
       terminalOutput.appendChild(lineDiv);
 
       // Si el usuario saltó la animación, renderizamos directo
@@ -307,7 +307,7 @@
     entry.innerHTML = `
       <div class="terminal-cmd-echo">
         <span class="term-prompt-user">${CONFIG.username}</span><span class="term-prompt-at">@</span><span class="term-prompt-host">${CONFIG.hostname}</span><span class="term-prompt-sep">:</span><span class="term-prompt-path">${CONFIG.path}</span><span class="term-prompt-sign">$</span>
-        <span class="text-slate-100 font-bold ml-1">${escapeHtml(cmd)}</span>
+        <span class="text-[#2C2825] font-bold ml-1">${escapeHtml(cmd)}</span>
       </div>
     `;
     terminalOutput.appendChild(entry);
@@ -368,7 +368,7 @@
         break;
 
       case 'whoami':
-        printOutput(`<div class="term-highlight">visitor</div><div class="text-xs text-slate-400">Permisos: Explorador autorizado del portfolio</div>`);
+        printOutput(`<div class="term-highlight">visitor</div><div class="text-xs text-[#635E59]">Permisos: Explorador autorizado del portfolio</div>`);
         break;
 
       case 'date':
@@ -382,7 +382,7 @@
       default:
         printOutput(`
           <div class="term-error">cachyos-shell: command not found: <span class="font-bold">${escapeHtml(cmd)}</span></div>
-          <div class="text-slate-400 text-xs mt-1">Escribe '<span class="term-warning cursor-pointer underline" onclick="window.TerminalRun('help')">help</span>' para ver la lista de comandos disponibles.</div>
+          <div class="text-[#635E59] text-xs mt-1">Escribe '<span class="term-warning cursor-pointer underline" onclick="window.TerminalRun('help')">help</span>' para ver la lista de comandos disponibles.</div>
         `);
         break;
     }
@@ -397,30 +397,30 @@
         <div class="term-highlight font-bold mb-2">Comandos del sistema disponibles:</div>
         <div class="grid grid-cols-1 sm:grid-cols-[130px_1fr] gap-x-3 gap-y-1 text-sm">
           <div><span class="term-warning font-bold">help</span></div>
-          <div class="text-slate-300">Muestra este menú de ayuda y comandos.</div>
+          <div class="text-[#2C2825]">Muestra este menú de ayuda y comandos.</div>
 
           <div><span class="term-warning font-bold">about</span></div>
-          <div class="text-slate-300">Biografía sobre mi perfil, formación y filosofía.</div>
+          <div class="text-[#2C2825]">Biografía sobre mi perfil, formación y filosofía.</div>
 
           <div><span class="term-warning font-bold">projects</span></div>
-          <div class="text-slate-300">Listado de proyectos destacados con enlaces a GitHub.</div>
+          <div class="text-[#2C2825]">Listado de proyectos destacados con enlaces a GitHub.</div>
 
           <div><span class="term-warning font-bold">skills</span></div>
-          <div class="text-slate-300">Stack tecnológico y competencias en formato tabla.</div>
+          <div class="text-[#2C2825]">Stack tecnológico y competencias en formato tabla.</div>
 
           <div><span class="term-warning font-bold">neofetch</span></div>
-          <div class="text-slate-300">Ficha técnica del sistema CachyOS / Arch y specs.</div>
+          <div class="text-[#2C2825]">Ficha técnica del sistema CachyOS / Arch y specs.</div>
 
           <div><span class="term-warning font-bold">contact</span></div>
-          <div class="text-slate-300">Información de contacto, email y redes sociales.</div>
+          <div class="text-[#2C2825]">Información de contacto, email y redes sociales.</div>
 
           <div><span class="term-warning font-bold">clear</span></div>
-          <div class="text-slate-300">Limpia la pantalla de la terminal.</div>
+          <div class="text-[#2C2825]">Limpia la pantalla de la terminal.</div>
 
           <div><span class="term-warning font-bold">theme</span></div>
-          <div class="text-slate-300">Alterna el esquema de colores Neón (Cyan / Matrix / Synthwave).</div>
+          <div class="text-[#2C2825]">Alterna el esquema de colores Neón (Warm Sand / Minimalist).</div>
         </div>
-        <div class="term-muted text-xs mt-2 pt-2 border-t border-slate-800">
+        <div class="term-muted text-xs mt-2 pt-2 border-t border-[#DAD3C6]">
           Tip: Usa las teclas [↑] y [↓] para navegar por el historial o [Tab] para autocompletar.
         </div>
       </div>
@@ -435,18 +435,18 @@
     const html = `
       <div class="space-y-2">
         <div class="term-highlight font-bold text-base">Francesc Capllonch Massanet</div>
-        <div class="text-indigo-400 font-medium">Estudiante de DAM (Desarrollo de Aplicaciones Multiplataforma) @ CIFP Pau Casesnoves</div>
-        <p class="text-slate-300 leading-relaxed">
+        <div class="text-[#635E59] font-medium">Estudiante de DAM (Desarrollo de Aplicaciones Multiplataforma) @ CIFP Pau Casesnoves</div>
+        <p class="text-[#2C2825] leading-relaxed">
           Apasionado por la informática, los sistemas Linux y el desarrollo de software limpio y eficiente. 
           Cuento con formación como <span class="term-highlight">Técnico en Sistemas Microinformáticos y Redes (SMR - EQF 4)</span> 
           y una constante motivación por la ciberseguridad.
         </p>
-        <p class="text-slate-300 leading-relaxed">
+        <p class="text-[#2C2825] leading-relaxed">
           Además del código, soy monitor de <span class="term-highlight">Kitesurf</span> desde hace más de 2 años. Esta experiencia 
           me ha enseñado a comunicarme con claridad en inglés, trabajar bajo presión, resolver imprevistos y liderar personas 
           con paciencia y empatía.
         </p>
-        <div class="flex items-center gap-2 pt-1 text-xs text-slate-400">
+        <div class="flex items-center gap-2 pt-1 text-xs text-[#635E59]">
           <span class="term-success">●</span> Mallorca, Illes Balears &nbsp;|&nbsp; 
           <span class="term-success">●</span> Enfoque: Frontend Moderno, Cross-Platform (Flutter) & Linux
         </div>
@@ -462,12 +462,12 @@
     let cardsHtml = PROJECTS.map((proj, idx) => `
       <div class="term-project-card">
         <div class="flex flex-wrap items-center justify-between gap-1 mb-1">
-          <span class="font-bold text-slate-100">${idx + 1}. ${proj.title}</span>
+          <span class="font-bold text-[#2C2825]">${idx + 1}. ${proj.title}</span>
           <a href="${proj.url}" target="_blank" rel="noopener noreferrer" class="term-link text-xs flex items-center gap-1">
             Ver código en GitHub <span>↗</span>
           </a>
         </div>
-        <p class="text-xs text-slate-300 mb-2">${proj.desc}</p>
+        <p class="text-xs text-[#635E59] mb-2">${proj.desc}</p>
         <div class="flex flex-wrap gap-1">
           ${proj.tech.map(t => `<span class="term-tag">${t}</span>`).join('')}
         </div>
@@ -504,10 +504,10 @@
 └────────────────────┴─────────────────────────────────────────────────┘</pre>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs pt-1">
-          <div class="p-2 rounded bg-slate-900/60 border border-slate-800">
+          <div class="p-2 rounded bg-[#F4F1EC] border border-[#DAD3C6] text-[#2C2825]">
             <span class="term-success font-bold">Mentalidad de Seguridad:</span> Enfoque proactivo en buenas prácticas y diseño seguro.
           </div>
-          <div class="p-2 rounded bg-slate-900/60 border border-slate-800">
+          <div class="p-2 rounded bg-[#F4F1EC] border border-[#DAD3C6] text-[#2C2825]">
             <span class="term-highlight font-bold">Pensamiento Crítico:</span> Capacidad de análisis y resolución estructurada de bugs.
           </div>
         </div>
@@ -533,7 +533,7 @@
       <div class="neofetch-container">
         <div class="neofetch-logo">${asciiLogo}</div>
         <div class="neofetch-info">
-          <div class="neofetch-title">francesc<span class="text-slate-400">@</span>cachyos-zenith</div>
+          <div class="neofetch-title">francesc<span class="text-[#8C857B]">@</span>cachyos-zenith</div>
           <div class="neofetch-sep">-----------------------------</div>
           <div class="neofetch-row"><span class="neofetch-key">OS:</span><span class="neofetch-val">CachyOS Linux x86_64 (Arch-based)</span></div>
           <div class="neofetch-row"><span class="neofetch-key">Host:</span><span class="neofetch-val">CIFP Pau Casesnoves</span></div>
@@ -542,18 +542,16 @@
           <div class="neofetch-row"><span class="neofetch-key">Shell:</span><span class="neofetch-val">zsh 5.9 (x86_64-pc-linux-gnu)</span></div>
           <div class="neofetch-row"><span class="neofetch-key">WM:</span><span class="neofetch-val">Hyprland / Web-Engine</span></div>
           <div class="neofetch-row"><span class="neofetch-key">Terminal:</span><span class="neofetch-val">CachyOS Portfolio Shell v${CONFIG.version}</span></div>
+          <div class="neofetch-row"><span class="neofetch-key">Palette:</span><span class="neofetch-val font-semibold">#FFFFFF, #F4F1EC, #E8E2D8, #DAD3C6, #CFC7B8</span></div>
           <div class="neofetch-row"><span class="neofetch-key">Interests:</span><span class="neofetch-val">Linux, Web Dev, Cybersecurity, Kitesurf 🏄</span></div>
           <div class="neofetch-row"><span class="neofetch-key">Memory:</span><span class="neofetch-val">100% Focused & Motivated</span></div>
 
           <div class="neofetch-palette">
-            <span class="palette-box bg-slate-900 border border-slate-700"></span>
-            <span class="palette-box bg-red-500"></span>
-            <span class="palette-box bg-emerald-500"></span>
-            <span class="palette-box bg-yellow-400"></span>
-            <span class="palette-box bg-sky-500"></span>
-            <span class="palette-box bg-purple-500"></span>
-            <span class="palette-box bg-cyan-400"></span>
-            <span class="palette-box bg-slate-100"></span>
+            <span class="palette-box" style="background-color: #FFFFFF;" title="#FFFFFF"></span>
+            <span class="palette-box" style="background-color: #F4F1EC;" title="#F4F1EC"></span>
+            <span class="palette-box" style="background-color: #E8E2D8;" title="#E8E2D8"></span>
+            <span class="palette-box" style="background-color: #DAD3C6;" title="#DAD3C6"></span>
+            <span class="palette-box" style="background-color: #CFC7B8;" title="#CFC7B8"></span>
           </div>
         </div>
       </div>
@@ -569,17 +567,17 @@
       <div class="space-y-2">
         <div class="term-highlight font-bold">Información de Contacto & Redes:</div>
         <div class="grid grid-cols-1 sm:grid-cols-[110px_1fr] gap-x-3 gap-y-1.5 text-sm">
-          <div class="text-slate-400">Email:</div>
+          <div class="text-[#635E59]">Email:</div>
           <div><a href="mailto:frcapllonch@outlook.com" class="term-link font-mono">frcapllonch@outlook.com</a></div>
 
-          <div class="text-slate-400">LinkedIn:</div>
+          <div class="text-[#635E59]">LinkedIn:</div>
           <div><a href="https://www.linkedin.com/in/francesc-capllonch-massanet-62b5a2365/" target="_blank" rel="noopener noreferrer" class="term-link">linkedin.com/in/francesc-capllonch-massanet</a></div>
 
-          <div class="text-slate-400">GitHub:</div>
+          <div class="text-[#635E59]">GitHub:</div>
           <div><a href="https://github.com/fr-capllonch" target="_blank" rel="noopener noreferrer" class="term-link font-mono">github.com/fr-capllonch</a></div>
 
-          <div class="text-slate-400">Ubicación:</div>
-          <div class="text-slate-200">Mallorca, España 📍</div>
+          <div class="text-[#635E59]">Ubicación:</div>
+          <div class="text-[#2C2825]">Mallorca, España 📍</div>
         </div>
       </div>
     `;
@@ -607,7 +605,7 @@
       terminalWindow.classList.add(nextTheme);
     }
 
-    const themeNames = ['Cyberpunk Cyan (Default)', 'Matrix Green', 'Synthwave Magenta'];
+    const themeNames = ['Warm Sand & Linen (Default)', 'Sandstone Focus', 'Pure Minimalist'];
     printOutput(`<div class="term-success">Esquema de color cambiado a: <span class="font-bold">${themeNames[activeThemeIndex]}</span></div>`);
   }
 
