@@ -10,7 +10,10 @@ const translations = {
 
     // Portada
     "hero.title": "Benvingut al meu portfoli!",
-    "hero.subtitle": "Consola interactiva de desenvolupador estil CachyOS. Escriu ordres o prem els botons d'accés ràpid.",
+    "hero.subtitle": "Pots usar aquesta consola per obtenir informació del meu perfil! Escriu ordres o prem els botons d'accés ràpid.",
+
+    //Scroll
+    "hero.scroll_down": "Desplaça't cap avall per veure més informació",
 
     // Sobre mi
     "about.title": "Sobre mi",
@@ -86,7 +89,10 @@ const translations = {
 
     // Portada
     "hero.title": "¡Bienvenido a mi portfolio!",
-    "hero.subtitle": "Consola interactiva de desarrollador estilo CachyOS. Escribe comandos o pulsa los botones de acceso rápido.",
+    "hero.subtitle": "Puedes usar esta consola para obtener información sobre mi perfil! Escribe comandos o pulsa los botones de acceso rápido.",
+
+    //Scroll
+    "hero.scroll_down": "Desplázate hacia abajo para ver más información",
 
     // Sobre mí
     "about.title": "Sobre mí",
@@ -162,7 +168,10 @@ const translations = {
 
     // Hero
     "hero.title": "Welcome to my Portfolio!",
-    "hero.subtitle": "Interactive developer terminal styled after CachyOS. Type commands or use the quick access buttons below.",
+    "hero.subtitle": "You can use this terminal to get information about my profile! Type commands or use the quick access buttons below.",
+
+    //Scroll
+    "hero.scroll_down": "Scroll down to see more information",
 
     // About me
     "about.title": "About Me",

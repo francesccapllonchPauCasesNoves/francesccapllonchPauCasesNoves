@@ -163,19 +163,19 @@
             <!-- Indicador de scroll para seguir explorando -->
             <a href="#aboutMe" class="terminal-scroll-hint animate-bounce">
                 <span>↓</span>
-                <span>Scroll down to see traditional CV</span>
+                <span data-i18n="hero.scroll_down">Scroll down to see traditional CV</span>
                 <span>↓</span>
             </a>
         </section>
-        <section id="aboutMe" class="min-h-screen bg-[#F4F1EC] text-[#2C2825] py-16 border-t border-[#DAD3C6]">
-            <div>
-                <div class=" flex flex-col justify-center gap-8 p-8">
-                    <h1 class=" text-6xl font-bold text-[#2C2825]" data-i18n="about.title">About Me</h1>
+        <section id="aboutMe" class="min-h-screen flex flex-col jutify-center bg-[#F4F1EC] text-[#2C2825] py-6 lg:py-12 border-t border-[#DAD3C6]">
+            <div class="w-full max-w mx-auto">
+                <div class=" flex flex-col justify-center mb-3 px-8">
+                    <h1 class=" text-4xl lg:text-5xl font-bold text-[#2C2825]" data-i18n="about.title">About Me</h1>
                 </div>
-                <div class="grid grid-cols-1 lg:grid-cols-2 justify-center gap-12 p-8">
-                    <div class="flex flex-col gap-6">
-                        <div class="flex flex-col sm:flex-row items-start sm:items-end gap-6 bg-[#FFFFFF] p-6 rounded-2xl border border-[#DAD3C6] shadow-sm">
-                            <img src="profile.jpg" class="w-44 h-44 rounded-xl object-cover bg-[#E8E2D8] p-1.5 border border-[#DAD3C6] shadow-sm"
+                <div class="grid grid-cols-1 lg:grid-cols-2 justify-center gap-6 lg:gap-8 px-8">
+                    <div class="flex flex-col gap-4">
+                        <div class="flex flex-col sm:flex-row items-start sm:items-end gap-5 bg-[#FFFFFF] p-5 rounded-2xl border border-[#DAD3C6] shadow-sm">
+                            <img src="profile.jpg" class="w-32 h-32 lg:w-40 lg:h-40 rounded-xl object-cover bg-[#E8E2D8] p-1.5 border border-[#DAD3C6] shadow-sm"
                                 alt="Foto de perfil">
                             <div class="flex flex-col gap-1.5 text-left">
                                 <h2 class="text-2xl font-bold tracking-tight text-[#2C2825]">
@@ -184,8 +184,12 @@
                                 <p class="text-[#635E59] font-semibold text-sm">CIFP Pau Casesnoves</p>
                                 <p class="text-xs text-[#8C857B]">20-04-2007</p>
                                 <p class="text-sm font-mono text-[#2C2825]">frcapllonch@outlook.com</p>
-                                <a href="https://www.linkedin.com/in/francesc-capllonch-massanet-62b5a2365/"
-                                    class="mt-2 text-sm font-semibold text-[#2C2825] underline hover:text-[#635E59]">LinkedIn &rarr;</a>
+                                <div >
+                                    <a href="https://www.linkedin.com/in/francesc-capllonch-massanet-62b5a2365/"
+                                        class="mt-2 text-sm font-semibold text-[#2C2825] underline hover:text-[#635E59]">LinkedIn &rarr;</a>
+                                    <a href="https://github.com/francesccapllonchPauCasesNoves"
+                                        class="mt-1 text-sm font-semibold text-[#2C2825] underline hover:text-[#635E59]">GitHub &rarr;</a>
+                                </div>
                             </div>
                         </div>
                         <div class="text-[#2C2825] leading-relaxed bg-[#FFFFFF] p-6 rounded-2xl border border-[#DAD3C6] shadow-sm" data-i18n="about.text">
@@ -196,10 +200,10 @@
                                 instructor,
                                 there i improved how to explain myself in english and how to treat with customers. </p>
                         </div>
-                        <div>
-                            <h2 class="text-2xl font-bold tracking-tight text-[#2C2825] mb-2">Skills</h2>
-                            <div class="slider">
-                                <div class="slide-track">
+                        <div class="flex flex-col w-full h-fit">
+                            <h2 class="text-2xl font-bold tracking-tight text-[#2C2825] ">Skills</h2>
+                            <div class="slider relative w-full overflow-hidden">
+                                <div class="slide-track flex w-[200%] gap-4">
                                     <div class="slide" data-i18n="skill.1">
                                         <p>Critical Thinking </p>
                                     </div>
@@ -231,7 +235,7 @@
                             </div>
                         </div>
                         <div class="bg-[#FFFFFF] p-6 rounded-2xl border border-[#DAD3C6] shadow-sm">
-                            <h2 class="text-2xl font-bold tracking-tight text-[#2C2825]" data-i18n="certs.title">
+                            <h2 class="text-2xl font-bold tracking-tight text-[#2C2825] " data-i18n="certs.title">
                                 Certifications and degrees</h2>
 
                             <div class="pt-4">
