@@ -5,6 +5,7 @@ const translations = {
 
     // Navegació
     "nav.about": "Sobre mi",
+    "nav.skills": "Skills i Formació",
     "nav.projects": "Projectes",
     "nav.contact": "Contacte",
 
@@ -21,6 +22,7 @@ const translations = {
       "Sóc estudiant de Desenvolupament d'Aplicacions Multiplataforma a Mallorca, amb moltes ganes d'aprendre informàtica i programació. Faig molt d'esport, la majoria relacionat amb la vela, però el meu preferit és el kitesurf. Fa més de 2 anys que sóc monitor de kitesurf, i allà vaig millorar la meva manera d'explicar-me en anglès i de tractar amb els clients.",
 
     // Habilitats
+    "skills_section.title": "Habilitats i Formació",
     "skills.title": "Habilitats",
     "skill.1": "Pensament crític",
     "skill.2": "Mentalitat de seguretat",
@@ -84,6 +86,7 @@ const translations = {
 
     // Navegación
     "nav.about": "Sobre mí",
+    "nav.skills": "Skills y Formación",
     "nav.projects": "Proyectos",
     "nav.contact": "Contacto",
 
@@ -100,6 +103,7 @@ const translations = {
       "Soy estudiante de Desarrollo de Aplicaciones Multiplataforma en Mallorca, con muchas ganas de aprender informática y programación. Hago mucho deporte, la mayoría relacionado con la vela, pero mi favorito es el kitesurf. Llevo más de 2 años como monitor de kitesurf, y allí mejoré mi forma de expresarme en inglés y de tratar con los clientes.",
 
     // Habilidades
+    "skills_section.title": "Habilidades y Formación",
     "skills.title": "Habilidades",
     "skill.1": "Pensamiento crítico",
     "skill.2": "Mentalidad de seguridad",
@@ -163,6 +167,7 @@ const translations = {
 
     // Navigation
     "nav.about": "About Me",
+    "nav.skills": "Skills & Education",
     "nav.projects": "Projects",
     "nav.contact": "Contact",
 
@@ -179,6 +184,7 @@ const translations = {
       "I am a student, currently studying Multiplatform Application Development in Mallorca, with a great desire to learn IT and programming. I do a lot of sports, most of them related to sailing, but my favorite is kitesurfing. I have been a kitesurf instructor for more than 2 years, where I improved how to explain myself in English and how to deal with customers.",
 
     // Skills
+    "skills_section.title": "Skills & Education",
     "skills.title": "Skills",
     "skill.1": "Critical Thinking",
     "skill.2": "Security Mindset",

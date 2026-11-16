@@ -86,51 +86,53 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const track = document.querySelector('.slider');
 
-window.addEventListener('load', () => {
-  // Buscamos la animación del carrusel por su nombre en CSS (@keyframes scroll)
-  const anim = document.getAnimations().find(
-    a => a.animationName === 'scroll'
-  );
+if (track) {
+  window.addEventListener('load', () => {
+    // Buscamos la animación del carrusel por su nombre en CSS (@keyframes scroll)
+    const anim = document.getAnimations().find(
+      a => a.animationName === 'scroll'
+    );
 
-  if (!anim) {
-    console.warn("No se encontró la animación 'scroll'. Revisa el nombre en tu CSS.");
-    return;
-  }
+    if (!anim) {
+      console.warn("No se encontró la animación 'scroll'. Revisa el nombre en tu CSS.");
+      return;
+    }
 
-  let animFrameId;
+    let animFrameId;
 
-  // Desaceleración progresiva (freno suave)
-  track.addEventListener('mouseenter', () => {
-    cancelAnimationFrame(animFrameId);
+    // Desaceleración progresiva (freno suave)
+    track.addEventListener('mouseenter', () => {
+      cancelAnimationFrame(animFrameId);
 
-    const slowDown = () => {
-      if (anim.playbackRate > 0.005) {
-        anim.playbackRate *= 0.985;
-        animFrameId = requestAnimationFrame(slowDown);
-      } else {
-        anim.playbackRate = 0;
-      }
-    };
+      const slowDown = () => {
+        if (anim.playbackRate > 0.005) {
+          anim.playbackRate *= 0.985;
+          animFrameId = requestAnimationFrame(slowDown);
+        } else {
+          anim.playbackRate = 0;
+        }
+      };
 
-    slowDown();
+      slowDown();
+    });
+
+    // Aceleración progresiva (arranque suave)
+    track.addEventListener('mouseleave', () => {
+      cancelAnimationFrame(animFrameId);
+
+      const speedUp = () => {
+        if (anim.playbackRate < 0.995) {
+          anim.playbackRate += (1 - anim.playbackRate) * 0.015;
+          animFrameId = requestAnimationFrame(speedUp);
+        } else {
+          anim.playbackRate = 1;
+        }
+      };
+
+      speedUp();
+    });
   });
-
-  // Aceleración progresiva (arranque suave)
-  track.addEventListener('mouseleave', () => {
-    cancelAnimationFrame(animFrameId);
-
-    const speedUp = () => {
-      if (anim.playbackRate < 0.995) {
-        anim.playbackRate += (1 - anim.playbackRate) * 0.015;
-        animFrameId = requestAnimationFrame(speedUp);
-      } else {
-        anim.playbackRate = 1;
-      }
-    };
-
-    speedUp();
-  });
-});
+}
 
 function setLanguage(lang) {
   if (!translations[lang]) lang = 'en';

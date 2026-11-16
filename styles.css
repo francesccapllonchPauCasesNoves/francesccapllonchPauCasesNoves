@@ -29,6 +29,10 @@
   --font-mono: 'JetBrains Mono', 'Fira Code', 'Roboto Mono', monospace;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: var(--color-bg-main);
   color: var(--color-text-main);
@@ -36,6 +40,10 @@ body {
   padding: 0;
   overflow-x: hidden;
   font-family: var(--font-mono);
+}
+
+section[id] {
+  scroll-margin-top: 5rem;
 }
 
 /* ========================================================

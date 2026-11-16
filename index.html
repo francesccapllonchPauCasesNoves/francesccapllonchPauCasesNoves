@@ -57,12 +57,13 @@
     <header id="header"
         class="sticky top-0 w-full right-0 z-50 transition-transform duration-300 translate-y-0 bg-[#FFFFFF]/90 text-[#2C2825] backdrop-blur-md border-b border-[#DAD3C6] shadow-sm">
         <div class="mx-auto flex justify-center p-3 sm:p-4">
-            <nav class="flex items-center gap-6 sm:gap-8 text-sm sm:text-base font-medium">
+            <nav class="flex items-center gap-4 sm:gap-6 lg:gap-8 text-xs sm:text-sm lg:text-base font-medium">
                 <a href="#terminal-section" class="hover:text-[#635E59] transition font-mono text-[#2C2825] font-semibold">&gt;_ Terminal</a>
                 <a href="#aboutMe" data-i18n="nav.about" class="hover:text-[#635E59] transition text-[#2C2825]">About Me</a>
+                <a href="#skills" data-i18n="nav.skills" class="hover:text-[#635E59] transition text-[#2C2825]">Skills</a>
                 <a href="#projects" data-i18n="nav.projects" class="hover:text-[#635E59] transition text-[#2C2825]">Projects</a>
                 <a href="#contacte" data-i18n="nav.contact" class="hover:text-[#635E59] transition text-[#2C2825]">Contact</a>
-                <div class="flex gap-1 ml-3 sm:ml-6">
+                <div class="flex gap-1 ml-2 sm:ml-4 lg:ml-6">
                     <button data-lang="ca" aria-pressed="false"
                         class="px-2 py-1 text-xs sm:text-sm rounded-md transition aria-pressed:bg-[#CFC7B8] aria-pressed:text-[#2C2825] aria-pressed:font-bold hover:bg-[#E8E2D8] text-[#635E59]">CA</button>
                     <button data-lang="es" aria-pressed="false"
@@ -167,164 +168,234 @@
                 <span>↓</span>
             </a>
         </section>
-        <section id="aboutMe" class="min-h-screen flex flex-col jutify-center bg-[#F4F1EC] text-[#2C2825] py-6 lg:py-12 border-t border-[#DAD3C6]">
-            <div class="w-full max-w mx-auto">
-                <div class=" flex flex-col justify-center mb-3 px-8">
-                    <h1 class=" text-4xl lg:text-5xl font-bold text-[#2C2825]" data-i18n="about.title">About Me</h1>
+
+        <!-- SECCIÓN 1: SOBRE MÍ (Perfil y Bio personal) -->
+        <section id="aboutMe" class="min-h-screen scroll-mt-20 flex flex-col justify-center bg-[#F4F1EC] text-[#2C2825] py-20 px-6 sm:px-10 lg:px-16 border-t border-[#DAD3C6]">
+            <div class="max-w-5xl mx-auto w-full">
+                <!-- Encabezado de la sección con espacio generoso -->
+                <div class="mb-10 text-center sm:text-left">
+                    <span class="text-xs uppercase tracking-widest font-mono text-[#8C857B] font-semibold block mb-2">// 01 &bull; Personal Profile &amp; Biography</span>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#2C2825]" data-i18n="about.title">About Me</h1>
                 </div>
-                <div class="grid grid-cols-1 lg:grid-cols-2 justify-center gap-6 lg:gap-8 px-8">
-                    <div class="flex flex-col gap-4">
-                        <div class="flex flex-col sm:flex-row items-start sm:items-end gap-5 bg-[#FFFFFF] p-5 rounded-2xl border border-[#DAD3C6] shadow-sm">
-                            <img src="profile.jpg" class="w-32 h-32 lg:w-40 lg:h-40 rounded-xl object-cover bg-[#E8E2D8] p-1.5 border border-[#DAD3C6] shadow-sm"
-                                alt="Foto de perfil">
-                            <div class="flex flex-col gap-1.5 text-left">
-                                <h2 class="text-2xl font-bold tracking-tight text-[#2C2825]">
-                                    Francesc Capllonch Massanet
-                                </h2>
-                                <p class="text-[#635E59] font-semibold text-sm">CIFP Pau Casesnoves</p>
-                                <p class="text-xs text-[#8C857B]">20-04-2007</p>
-                                <p class="text-sm font-mono text-[#2C2825]">frcapllonch@outlook.com</p>
-                                <div >
-                                    <a href="https://www.linkedin.com/in/francesc-capllonch-massanet-62b5a2365/"
-                                        class="mt-2 text-sm font-semibold text-[#2C2825] underline hover:text-[#635E59]">LinkedIn &rarr;</a>
-                                    <a href="https://github.com/francesccapllonchPauCasesNoves"
-                                        class="mt-1 text-sm font-semibold text-[#2C2825] underline hover:text-[#635E59]">GitHub &rarr;</a>
+
+                <!-- Grid equilibrado para Perfil y Biografía -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                    <!-- Tarjeta de Perfil -->
+                    <div class="lg:col-span-5 bg-[#FFFFFF] p-8 rounded-3xl border border-[#DAD3C6] shadow-sm flex flex-col justify-between items-center sm:items-start text-center sm:text-left">
+                        <div class="w-full flex flex-col items-center sm:items-start">
+                            <div class="relative mb-6">
+                                <img src="profile.jpg" class="w-40 h-40 lg:w-44 lg:h-44 rounded-2xl object-cover bg-[#E8E2D8] p-1.5 border border-[#DAD3C6] shadow-sm"
+                                    alt="Foto de perfil">
+                                <span class="absolute -bottom-2 -right-2 px-3 py-1 bg-[#E8E2D8] border border-[#DAD3C6] rounded-full text-xs font-mono font-semibold text-[#2C2825] shadow-xs">
+                                    DAM Student
+                                </span>
+                            </div>
+                            <h2 class="text-2xl font-bold tracking-tight text-[#2C2825] mb-1">
+                                Francesc Capllonch Massanet
+                            </h2>
+                            <p class="text-[#635E59] font-semibold text-sm mb-1">CIFP Pau Casesnoves</p>
+                            <p class="text-xs text-[#8C857B] font-mono mb-4">20-04-2007 &bull; Mallorca, ES</p>
+
+                            <div class="w-full pt-4 border-t border-[#DAD3C6] flex flex-col gap-2.5 text-sm">
+                                <div class="flex items-center justify-center sm:justify-start gap-2 text-[#635E59]">
+                                    <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                    </svg>
+                                    <a href="mailto:frcapllonch@outlook.com" class="font-mono text-xs sm:text-sm text-[#2C2825] hover:underline break-all">frcapllonch@outlook.com</a>
                                 </div>
                             </div>
                         </div>
-                        <div class="text-[#2C2825] leading-relaxed bg-[#FFFFFF] p-6 rounded-2xl border border-[#DAD3C6] shadow-sm" data-i18n="about.text">
-                            <p>I am a Student, currently studing Multiplaform Aplication Development in Mallorca,
-                                with a great desire in learning IT and programing. I do a lot of sports, most of them
-                                are realted
-                                with sailing but my favorite is Kitesurf. I've been more than 2 years being a Kitesurf
-                                instructor,
-                                there i improved how to explain myself in english and how to treat with customers. </p>
+
+                        <div class="w-full pt-6 mt-6 border-t border-[#DAD3C6] flex flex-wrap justify-center sm:justify-start gap-3">
+                            <a href="https://www.linkedin.com/in/francesc-capllonch-massanet-62b5a2365/" target="_blank" rel="noopener noreferrer"
+                                class="inline-flex items-center gap-2 px-4 py-2 bg-[#F4F1EC] hover:bg-[#E8E2D8] border border-[#DAD3C6] rounded-xl text-xs font-bold text-[#2C2825] transition hover:-translate-y-0.5">
+                                LinkedIn &rarr;
+                            </a>
+                            <a href="https://github.com/francesccapllonchPauCasesNoves" target="_blank" rel="noopener noreferrer"
+                                class="inline-flex items-center gap-2 px-4 py-2 bg-[#F4F1EC] hover:bg-[#E8E2D8] border border-[#DAD3C6] rounded-xl text-xs font-bold text-[#2C2825] transition hover:-translate-y-0.5">
+                                GitHub &rarr;
+                            </a>
                         </div>
-                        <div class="flex flex-col w-full h-fit">
-                            <h2 class="text-2xl font-bold tracking-tight text-[#2C2825] ">Skills</h2>
-                            <div class="slider relative w-full overflow-hidden">
-                                <div class="slide-track flex w-[200%] gap-4">
-                                    <div class="slide" data-i18n="skill.1">
-                                        <p>Critical Thinking </p>
-                                    </div>
-                                    <div class="slide" data-i18n="skill.2">
-                                        <p>Security Mindset</p>
-                                    </div>
-                                    <div class="slide" data-i18n="skill.3">
-                                        <p>Attention to detail</p>
-                                    </div>
-                                    <div class="slide" data-i18n="skill.4">
-                                        <p>Priority Management</p>
-                                    </div>
+                    </div>
 
-                                    <div class="slide" data-i18n="skill.1">
-                                        <p>Critical Thinking </p>
-                                    </div>
-                                    <div class="slide" data-i18n="skill.2">
-                                        <p>Security Mindset</p>
-                                    </div>
-                                    <div class="slide" data-i18n="skill.3">
-                                        <p>Attention to detail</p>
-                                    </div>
-                                    <div class="slide" data-i18n="skill.4">
-                                        <p>Priority Management</p>
-                                    </div>
+                    <!-- Tarjeta de Biografía Personal -->
+                    <div class="lg:col-span-7 bg-[#FFFFFF] p-8 sm:p-10 rounded-3xl border border-[#DAD3C6] shadow-sm flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-2.5 mb-6">
+                                <span class="w-2.5 h-2.5 rounded-full bg-[#CFC7B8]"></span>
+                                <h3 class="text-xs uppercase tracking-widest font-mono text-[#8C857B] font-semibold">Bio &amp; Philosophy</h3>
+                            </div>
 
-                                </div>
-
+                            <div class="text-[#2C2825] text-base sm:text-lg leading-relaxed space-y-4" data-i18n="about.text">
+                                <p>I am a Student, currently studing Multiplaform Aplication Development in Mallorca,
+                                    with a great desire in learning IT and programing. I do a lot of sports, most of them
+                                    are realted
+                                    with sailing but my favorite is Kitesurf. I've been more than 2 years being a Kitesurf
+                                    instructor,
+                                    there i improved how to explain myself in english and how to treat with customers. </p>
                             </div>
                         </div>
-                        <div class="bg-[#FFFFFF] p-6 rounded-2xl border border-[#DAD3C6] shadow-sm">
-                            <h2 class="text-2xl font-bold tracking-tight text-[#2C2825] " data-i18n="certs.title">
-                                Certifications and degrees</h2>
 
-                            <div class="pt-4">
-                                <ul class="list-disc list-inside space-y-2 text-[#2C2825]">
-                                    <li data-i18n="cert.1">Technician in Microcomputer Systems and Networks - EQF Level
-                                        4</li>
-                                    <li data-i18n="cert.2">Introduction to Cisco Packet Tracer</li>
-                                    <li data-i18n="cert.3">Cisco Introduction to Cibersecurity</li>
-                                </ul>
+                        <!-- Aspectos clave / Pilares -->
+                        <div class="mt-8 pt-6 border-t border-[#DAD3C6] grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="p-4 bg-[#F4F1EC] rounded-2xl border border-[#DAD3C6]">
+                                <span class="text-xs text-[#8C857B] font-mono block mb-1">Focus</span>
+                                <span class="text-sm font-bold text-[#2C2825]">Multiplatform Dev &amp; Security</span>
+                            </div>
+                            <div class="p-4 bg-[#F4F1EC] rounded-2xl border border-[#DAD3C6]">
+                                <span class="text-xs text-[#8C857B] font-mono block mb-1">Soft Factor</span>
+                                <span class="text-sm font-bold text-[#2C2825]">Leadership &amp; English Comms</span>
                             </div>
                         </div>
                     </div>
-                    <div class="flex flex-col gap-6">
-                        <h2 class="text-3xl font-bold tracking-tight text-[#2C2825]"
-                            data-i18n="knowledge.title">IT & Programming Knowledge</h2>
-                        <article class="flex flex-col gap-4 bg-[#FFFFFF] p-6 rounded-2xl border border-[#DAD3C6] shadow-sm text-[#2C2825]">
+                </div>
+            </div>
+        </section>
 
-                            <p data-i18n="knowledge.text">
+        <!-- SECCIÓN 2: FORMACIÓN Y SKILLS (Stack técnico, competencias, certificaciones e idiomas) -->
+        <section id="skills" class="min-h-screen scroll-mt-20 flex flex-col justify-center bg-[#E8E2D8] text-[#2C2825] py-20 px-6 sm:px-10 lg:px-16 border-t border-[#DAD3C6]">
+            <div class="max-w-6xl mx-auto w-full">
+                <!-- Encabezado de la sección -->
+                <div class="mb-10 text-center sm:text-left">
+                    <span class="text-xs uppercase tracking-widest font-mono text-[#635E59] font-semibold block mb-2">// 02 &bull; Stack, Experience &amp; Degrees</span>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#2C2825]" data-i18n="skills_section.title">Habilitats i Formació</h1>
+                </div>
+
+                <!-- Soft Skills: Diseño limpio en grid (sustituye el carrusel cortado) -->
+                <div class="mb-8">
+                    <h2 class="text-xl font-bold text-[#2C2825] mb-4 flex items-center gap-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-[#CFC7B8]"></span>
+                        <span data-i18n="skills.title">Habilitats</span>
+                    </h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div class="bg-[#FFFFFF] p-4 rounded-2xl border border-[#DAD3C6] shadow-xs flex items-center gap-3 transition hover:-translate-y-0.5">
+                            <span class="w-9 h-9 rounded-xl bg-[#F4F1EC] border border-[#DAD3C6] flex items-center justify-center text-xs font-bold font-mono text-[#2C2825]">01</span>
+                            <p class="font-bold text-sm text-[#2C2825]" data-i18n="skill.1">Pensament crític</p>
+                        </div>
+                        <div class="bg-[#FFFFFF] p-4 rounded-2xl border border-[#DAD3C6] shadow-xs flex items-center gap-3 transition hover:-translate-y-0.5">
+                            <span class="w-9 h-9 rounded-xl bg-[#F4F1EC] border border-[#DAD3C6] flex items-center justify-center text-xs font-bold font-mono text-[#2C2825]">02</span>
+                            <p class="font-bold text-sm text-[#2C2825]" data-i18n="skill.2">Mentalitat de seguretat</p>
+                        </div>
+                        <div class="bg-[#FFFFFF] p-4 rounded-2xl border border-[#DAD3C6] shadow-xs flex items-center gap-3 transition hover:-translate-y-0.5">
+                            <span class="w-9 h-9 rounded-xl bg-[#F4F1EC] border border-[#DAD3C6] flex items-center justify-center text-xs font-bold font-mono text-[#2C2825]">03</span>
+                            <p class="font-bold text-sm text-[#2C2825]" data-i18n="skill.3">Atenció al detall</p>
+                        </div>
+                        <div class="bg-[#FFFFFF] p-4 rounded-2xl border border-[#DAD3C6] shadow-xs flex items-center gap-3 transition hover:-translate-y-0.5">
+                            <span class="w-9 h-9 rounded-xl bg-[#F4F1EC] border border-[#DAD3C6] flex items-center justify-center text-xs font-bold font-mono text-[#2C2825]">04</span>
+                            <p class="font-bold text-sm text-[#2C2825]" data-i18n="skill.4">Gestió de prioritats</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Grid principal para contenido técnico y formativo -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                    <!-- Columna Izquierda: Conocimientos + Competencias (7 columnas) -->
+                    <div class="lg:col-span-7 flex flex-col gap-8">
+                        <!-- IT & Programming Knowledge -->
+                        <article class="bg-[#FFFFFF] p-6 sm:p-8 rounded-3xl border border-[#DAD3C6] shadow-sm flex flex-col gap-4">
+                            <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-[#2C2825]" data-i18n="knowledge.title">
+                                Coneixements d'informàtica i programació
+                            </h2>
+                            <p class="text-sm sm:text-base text-[#2C2825] leading-relaxed" data-i18n="knowledge.text">
                                 Hands-on experience in responsive web development using <strong>Tailwind CSS</strong>,
                                 along with foundational knowledge of cross-platform apps using <strong>Flutter</strong>.
                                 Skilled in designing and querying relational and NoSQL databases with
                                 <strong>MySQL</strong> and <strong>MongoDB</strong>,
                                 with an active self-learning focus on <strong>Cybersecurity</strong>.
                             </p>
-
-                            <div data-i18n="knowledge.langs" class="p-3 bg-[#F4F1EC] rounded-lg border border-[#DAD3C6] text-sm font-mono">
-                                <p>Programming Languages: Java, JavaScript, HTML, CSS, SQL</p>
+                            <div data-i18n="knowledge.langs" class="p-4 bg-[#F4F1EC] rounded-2xl border border-[#DAD3C6] text-xs sm:text-sm font-mono text-[#2C2825]">
+                                Programming Languages: Java, JavaScript, HTML, CSS, SQL
                             </div>
                         </article>
 
-                        <h2 class="text-2xl font-bold tracking-tight text-[#2C2825]" data-i18n="competences.title">
-                            Competences</h2>
-                        <article class="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-[#FFFFFF] p-6 rounded-2xl border border-[#DAD3C6] shadow-sm">
-
-                            <div class="flex items-start gap-3 p-3.5 bg-[#F4F1EC] rounded-xl border border-[#DAD3C6]">
-                                <span class="w-2.5 h-2.5 mt-1.5 bg-[#CFC7B8] rounded-full flex-shrink-0"></span>
-                                <div>
-                                    <h3 class="font-bold text-[#2C2825]" data-i18n="comp.1.title">Front-End Web
-                                        Development</h3>
-                                    <p class="text-xs text-[#635E59]" data-i18n="comp.1.desc">Frontend UI layout </p>
+                        <!-- Competències: 2x2 Grid -->
+                        <article class="bg-[#FFFFFF] p-6 sm:p-8 rounded-3xl border border-[#DAD3C6] shadow-sm flex flex-col gap-4">
+                            <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-[#2C2825]" data-i18n="competences.title">
+                                Competències
+                            </h2>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div class="flex items-start gap-3 p-4 bg-[#F4F1EC] rounded-2xl border border-[#DAD3C6]">
+                                    <span class="w-2.5 h-2.5 mt-1.5 bg-[#CFC7B8] rounded-full flex-shrink-0"></span>
+                                    <div>
+                                        <h3 class="font-bold text-sm sm:text-base text-[#2C2825]" data-i18n="comp.1.title">Front-End Web Development</h3>
+                                        <p class="text-xs text-[#635E59] mt-0.5" data-i18n="comp.1.desc">Frontend UI layout</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3 p-4 bg-[#F4F1EC] rounded-2xl border border-[#DAD3C6]">
+                                    <span class="w-2.5 h-2.5 mt-1.5 bg-[#CFC7B8] rounded-full flex-shrink-0"></span>
+                                    <div>
+                                        <h3 class="font-bold text-sm sm:text-base text-[#2C2825]" data-i18n="comp.2.title">Database Management</h3>
+                                        <p class="text-xs text-[#635E59] mt-0.5" data-i18n="comp.2.desc">Relational (SQL) &amp; NoSQL database design</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3 p-4 bg-[#F4F1EC] rounded-2xl border border-[#DAD3C6]">
+                                    <span class="w-2.5 h-2.5 mt-1.5 bg-[#CFC7B8] rounded-full flex-shrink-0"></span>
+                                    <div>
+                                        <h3 class="font-bold text-sm sm:text-base text-[#2C2825]" data-i18n="comp.3.title">Security</h3>
+                                        <p class="text-xs text-[#635E59] mt-0.5" data-i18n="comp.3.desc">Basic security practices</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3 p-4 bg-[#F4F1EC] rounded-2xl border border-[#DAD3C6]">
+                                    <span class="w-2.5 h-2.5 mt-1.5 bg-[#CFC7B8] rounded-full flex-shrink-0"></span>
+                                    <div>
+                                        <h3 class="font-bold text-sm sm:text-base text-[#2C2825]" data-i18n="comp.4.title">Version Control &amp; Workflow</h3>
+                                        <p class="text-xs text-[#635E59] mt-0.5" data-i18n="comp.4.desc">Git, GitHub &amp; team collaboration tools</p>
+                                    </div>
                                 </div>
                             </div>
-
-                            <div class="flex items-start gap-3 p-3.5 bg-[#F4F1EC] rounded-xl border border-[#DAD3C6]">
-                                <span class="w-2.5 h-2.5 mt-1.5 bg-[#CFC7B8] rounded-full flex-shrink-0"></span>
-                                <div>
-                                    <h3 class="font-bold text-[#2C2825]" data-i18n="comp.2.title">Database
-                                        Management</h3>
-                                    <p class="text-xs text-[#635E59]" data-i18n="comp.2.desc">Relational (SQL) & NoSQL
-                                        database design</p>
-                                </div>
-                            </div>
-
-                            <div class="flex items-start gap-3 p-3.5 bg-[#F4F1EC] rounded-xl border border-[#DAD3C6]">
-                                <span class="w-2.5 h-2.5 mt-1.5 bg-[#CFC7B8] rounded-full flex-shrink-0"></span>
-                                <div>
-                                    <h3 class="font-bold text-[#2C2825]" data-i18n="comp.3.title">Security </h3>
-                                    <p class="text-xs text-[#635E59]" data-i18n="comp.3.desc">Basic security practices
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div class="flex items-start gap-3 p-3.5 bg-[#F4F1EC] rounded-xl border border-[#DAD3C6]">
-                                <span class="w-2.5 h-2.5 mt-1.5 bg-[#CFC7B8] rounded-full flex-shrink-0"></span>
-                                <div>
-                                    <h3 class="font-bold text-[#2C2825]" data-i18n="comp.4.title">Version Control &
-                                        Workflow</h3>
-                                    <p class="text-xs text-[#635E59]" comp.4.desc>Git, GitHub & team collaboration tools
-                                    </p>
-                                </div>
-                            </div>
-
-                        </article>
-
-                        <h2 class="text-2xl font-bold tracking-tight text-[#2C2825]" data-i18n="languages.title">
-                            Languages </h2>
-                        <article class="bg-[#FFFFFF] p-6 rounded-2xl border border-[#DAD3C6] shadow-sm text-[#2C2825]">
-                            <ul class="space-y-1.5">
-                                <li data-i18n="lang.en">English - Medium Level</li>
-                                <li data-i18n="lang.es">Spanish - Native</li>
-                                <li data-i18n="lang.ca">Catalan - Native</li>
-                            </ul>
                         </article>
                     </div>
 
+                    <!-- Columna Derecha: Certificaciones + Idiomas (5 columnas) -->
+                    <div class="lg:col-span-5 flex flex-col gap-8">
+                        <!-- Certificaciones y titulaciones -->
+                        <article class="bg-[#FFFFFF] p-6 sm:p-8 rounded-3xl border border-[#DAD3C6] shadow-sm flex flex-col gap-4">
+                            <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-[#2C2825]" data-i18n="certs.title">
+                                Certificacions i titulacions
+                            </h2>
+                            <ul class="space-y-3 text-sm text-[#2C2825]">
+                                <li class="flex items-start gap-3 p-3.5 bg-[#F4F1EC] rounded-2xl border border-[#DAD3C6]">
+                                    <span class="text-[#2C2825] font-bold font-mono text-xs">01.</span>
+                                    <span data-i18n="cert.1">Technician in Microcomputer Systems and Networks - EQF Level 4</span>
+                                </li>
+                                <li class="flex items-start gap-3 p-3.5 bg-[#F4F1EC] rounded-2xl border border-[#DAD3C6]">
+                                    <span class="text-[#2C2825] font-bold font-mono text-xs">02.</span>
+                                    <span data-i18n="cert.2">Introduction to Cisco Packet Tracer</span>
+                                </li>
+                                <li class="flex items-start gap-3 p-3.5 bg-[#F4F1EC] rounded-2xl border border-[#DAD3C6]">
+                                    <span class="text-[#2C2825] font-bold font-mono text-xs">03.</span>
+                                    <span data-i18n="cert.3">Cisco Introduction to Cibersecurity</span>
+                                </li>
+                            </ul>
+                        </article>
+
+                        <!-- Idiomas -->
+                        <article class="bg-[#FFFFFF] p-6 sm:p-8 rounded-3xl border border-[#DAD3C6] shadow-sm flex flex-col gap-4">
+                            <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-[#2C2825]" data-i18n="languages.title">
+                                Idiomes
+                            </h2>
+                            <ul class="space-y-2.5 text-sm text-[#2C2825]">
+                                <li class="flex items-center justify-between p-3.5 bg-[#F4F1EC] rounded-2xl border border-[#DAD3C6]">
+                                    <span class="font-semibold" data-i18n="lang.en">English - Medium Level</span>
+                                    <span class="px-2.5 py-1 text-xs font-mono font-bold bg-[#E8E2D8] border border-[#DAD3C6] rounded-lg">B1/B2</span>
+                                </li>
+                                <li class="flex items-center justify-between p-3.5 bg-[#F4F1EC] rounded-2xl border border-[#DAD3C6]">
+                                    <span class="font-semibold" data-i18n="lang.es">Spanish - Native</span>
+                                    <span class="px-2.5 py-1 text-xs font-mono font-bold bg-[#E8E2D8] border border-[#DAD3C6] rounded-lg">Natiu</span>
+                                </li>
+                                <li class="flex items-center justify-between p-3.5 bg-[#F4F1EC] rounded-2xl border border-[#DAD3C6]">
+                                    <span class="font-semibold" data-i18n="lang.ca">Catalan - Native</span>
+                                    <span class="px-2.5 py-1 text-xs font-mono font-bold bg-[#E8E2D8] border border-[#DAD3C6] rounded-lg">Natiu</span>
+                                </li>
+                            </ul>
+                        </article>
+                    </div>
                 </div>
             </div>
         </section>
-        <section id="projects" class="min-h-screen bg-[#E8E2D8] py-16 text-[#2C2825] border-t border-[#DAD3C6]">
+
+        <!-- SECCIÓN 3: PROYECTOS -->
+        <section id="projects" class="min-h-screen scroll-mt-20 bg-[#F4F1EC] py-20 px-6 sm:px-10 lg:px-16 text-[#2C2825] border-t border-[#DAD3C6]">
             <div class=" flex flex-col justify-center gap-8 p-8">
                 <h1 class=" text-6xl font-bold text-[#2C2825]" data-i18n="projects.title">Projects</h1>
             </div>
@@ -383,7 +454,7 @@
         </section>
 
         <!-- Nueva Sección Semántica de Contacto (#contacte) -->
-        <section id="contacte" class="contact-section">
+        <section id="contacte" class="contact-section scroll-mt-20 min-h-screen flex flex-col justify-center">
             <div class="contact-container">
                 <!-- Encabezado de la sección -->
                 <header class="contact-header">
