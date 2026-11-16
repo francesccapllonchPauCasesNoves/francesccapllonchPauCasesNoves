@@ -49,10 +49,34 @@ section[id] {
   scroll-margin-top: var(--header-height, 4rem);
 }
 
+/* ========================================================
+   PER-SECTION ALTERNATING BACKGROUNDS WITH DOT PATTERN
+   ======================================================== */
 #aboutMe {
-  background-color: var(--palette-bg);
-  background-image: radial-gradient(rgba(207, 199, 184, 0.4) 1px, transparent 1px);
+  background-color: #F4F1EC;
+  background-image: radial-gradient(rgba(0, 0, 0, 0.055) 1px, transparent 1px);
   background-size: 24px 24px;
+}
+
+#skills {
+  background-color: #E8E2D8;
+  background-image: radial-gradient(rgba(0, 0, 0, 0.065) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+#projects {
+  background-color: #F4F1EC;
+  background-image: radial-gradient(rgba(0, 0, 0, 0.055) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+#contacte {
+  background-color: #E8E2D8;
+  background-image: radial-gradient(rgba(0, 0, 0, 0.065) 1px, transparent 1px);
+  background-size: 24px 24px;
+  color: var(--color-text-main);
+  position: relative;
+  overflow: hidden;
 }
 
 /* ========================================================
@@ -211,14 +235,6 @@ body.no-scroll {
 /* ========================================================
    SECCIÓN DE CONTACTE (#contacte) - DISPOSICIÓN RESPONSIVA
    ======================================================== */
-#contacte {
-  background-color: var(--palette-bg);
-  color: var(--color-text-main);
-  padding: 4rem 1.5rem 3rem;
-  position: relative;
-  overflow: hidden;
-}
-
 #contacte::before {
   content: '';
   position: absolute;
@@ -231,8 +247,9 @@ body.no-scroll {
 }
 
 .contact-container {
-  max-width: 1200px;
+  max-width: 72rem; /* max-w-6xl */
   margin: 0 auto;
+  width: 100%;
 }
 
 .contact-header {
