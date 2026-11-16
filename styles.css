@@ -49,6 +49,12 @@ section[id] {
   scroll-margin-top: var(--header-height, 4rem);
 }
 
+#aboutMe {
+  background-color: var(--palette-bg);
+  background-image: radial-gradient(rgba(207, 199, 184, 0.4) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
 /* ========================================================
    TERMINAL INTERACTIVA A PANTALLA COMPLETA (100vw x 100vh)
    ======================================================== */
