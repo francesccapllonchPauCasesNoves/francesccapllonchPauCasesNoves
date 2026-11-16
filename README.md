@@ -1,4 +1,4 @@
-# 💻 Francesc Capllonch Massanet — Interactive Portfolio & CV
+# 💻 Francesc Capllonch Massanet
 
 [Català](#català) | [Castellano](#castellano) | [English](#english)
 
