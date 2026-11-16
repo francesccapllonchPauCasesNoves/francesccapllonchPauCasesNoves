@@ -445,3 +445,46 @@ body.no-scroll {
 .form-submit-btn:active {
   transform: translateY(0);
 }
+
+/* ========================================================
+   CARD SLIDER INTERACTIVO (SECCIÓN PROJECTES)
+   ======================================================== */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+#projects-slider {
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.project-card {
+  scroll-snap-align: start;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+  will-change: transform;
+}
+
+.slider-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background-color: var(--palette-border);
+  transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  cursor: pointer;
+  border: none;
+  padding: 0;
+}
+
+.slider-dot:hover {
+  background-color: var(--palette-accent);
+}
+
+.slider-dot.active {
+  width: 1.75rem;
+  background-color: var(--color-primary);
+}

@@ -170,6 +170,156 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 700);
     }, 1800);
   }
+
+  // Inicialización del Card Slider interactivo de proyectos (60fps)
+  const initProjectsSlider = () => {
+    const slider = document.getElementById('projects-slider');
+    const prevBtn = document.getElementById('slider-prev-btn');
+    const nextBtn = document.getElementById('slider-next-btn');
+    const dotsContainer = document.getElementById('slider-dots');
+
+    if (!slider) return;
+
+    const cards = slider.querySelectorAll('.project-card');
+    if (cards.length === 0) return;
+
+    // Calcular el desplazamiento por tarjeta
+    const getCardStep = () => {
+      if (cards.length > 1) {
+        return cards[1].offsetLeft - cards[0].offsetLeft;
+      }
+      return cards[0].offsetWidth + 24;
+    };
+
+    // Crear o actualizar los indicadores de paginación
+    const renderDots = () => {
+      if (!dotsContainer) return;
+      dotsContainer.innerHTML = '';
+
+      cards.forEach((_, idx) => {
+        const dot = document.createElement('button');
+        dot.className = `slider-dot ${idx === 0 ? 'active' : ''}`;
+        dot.setAttribute('type', 'button');
+        dot.setAttribute('aria-label', `Anar al projecte ${idx + 1}`);
+        dot.addEventListener('click', () => {
+          const targetOffset = cards[idx].offsetLeft - slider.offsetLeft;
+          slider.scrollTo({ left: targetOffset, behavior: 'smooth' });
+        });
+        dotsContainer.appendChild(dot);
+      });
+    };
+
+    // Actualizar estado de dots y botones de flecha
+    const updateSliderControls = () => {
+      const step = getCardStep();
+      const scrollPos = slider.scrollLeft;
+      const activeIdx = Math.min(
+        cards.length - 1,
+        Math.max(0, Math.round(scrollPos / (step || 1)))
+      );
+
+      // Actualizar dots
+      if (dotsContainer) {
+        const dots = dotsContainer.querySelectorAll('.slider-dot');
+        dots.forEach((dot, idx) => {
+          if (idx === activeIdx) {
+            dot.classList.add('active');
+          } else {
+            dot.classList.remove('active');
+          }
+        });
+      }
+
+      // Actualizar botones prev/next
+      const maxScroll = slider.scrollWidth - slider.clientWidth;
+      if (prevBtn) {
+        prevBtn.disabled = scrollPos <= 10;
+      }
+      if (nextBtn) {
+        nextBtn.disabled = scrollPos >= maxScroll - 10;
+      }
+    };
+
+    renderDots();
+    updateSliderControls();
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        const step = getCardStep();
+        slider.scrollBy({ left: -step, behavior: 'smooth' });
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        const step = getCardStep();
+        slider.scrollBy({ left: step, behavior: 'smooth' });
+      });
+    }
+
+    let scrollTimeout;
+    slider.addEventListener('scroll', () => {
+      cancelAnimationFrame(scrollTimeout);
+      scrollTimeout = requestAnimationFrame(updateSliderControls);
+    }, { passive: true });
+
+    window.addEventListener('resize', () => {
+      updateSliderControls();
+    }, { passive: true });
+
+    // Soporte para Mouse Drag (arrastre con ratón en escritorio)
+    let isDown = false;
+    let startX = 0;
+    let scrollStart = 0;
+    let hasDragged = false;
+
+    slider.addEventListener('mousedown', (e) => {
+      isDown = true;
+      hasDragged = false;
+      startX = e.pageX - slider.offsetLeft;
+      scrollStart = slider.scrollLeft;
+      slider.classList.add('cursor-grabbing');
+      slider.classList.remove('cursor-grab');
+    });
+
+    window.addEventListener('mouseup', () => {
+      if (!isDown) return;
+      isDown = false;
+      slider.classList.remove('cursor-grabbing');
+      slider.classList.add('cursor-grab');
+    });
+
+    slider.addEventListener('mouseleave', () => {
+      if (!isDown) return;
+      isDown = false;
+      slider.classList.remove('cursor-grabbing');
+      slider.classList.add('cursor-grab');
+    });
+
+    slider.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const currentX = e.pageX - slider.offsetLeft;
+      const walk = (currentX - startX) * 1.3;
+      if (Math.abs(walk) > 4) {
+        hasDragged = true;
+      }
+      slider.scrollLeft = scrollStart - walk;
+    });
+
+    // Evitar que el click en los enlaces se active si el usuario estuvo arrastrando
+    slider.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', (e) => {
+        if (hasDragged) {
+          e.preventDefault();
+          e.stopPropagation();
+          hasDragged = false;
+        }
+      });
+    });
+  };
+
+  initProjectsSlider();
 });
 
 const track = document.querySelector('.slider');

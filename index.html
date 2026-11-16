@@ -441,62 +441,97 @@
             </div>
         </section>
 
-        <!-- SECCIÓN 3: PROYECTOS -->
-        <section id="projects" class="min-h-screen scroll-mt-16 bg-[#F4F1EC] pt-16 pb-12 px-6 sm:px-10 lg:px-16 text-[#2C2825] border-t border-[#DAD3C6]">
-            <div class=" flex flex-col justify-center gap-8 p-8">
-                <h1 class=" text-6xl font-bold text-[#2C2825]" data-i18n="projects.title">Projects</h1>
-            </div>
+        <!-- SECCIÓN 3: PROYECTOS (Card Slider Interactivo 60fps) -->
+        <section id="projects" class="min-h-screen scroll-mt-16 flex flex-col justify-center bg-[#F4F1EC] pt-16 pb-12 sm:pt-20 sm:pb-12 lg:pt-16 lg:pb-10 px-4 sm:px-8 lg:px-12 text-[#2C2825] border-t border-[#DAD3C6]">
+            <div class="max-w-6xl mx-auto w-full">
+                <!-- Fila de Encabezado con Controles de Navegación del Slider -->
+                <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6 sm:mb-8">
+                    <div>
+                        <span class="text-[11px] sm:text-xs uppercase tracking-widest font-mono text-[#8C857B] font-semibold block mb-1.5">// 03 &bull; Selected Works &amp; Code</span>
+                        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#2C2825]" data-i18n="projects.title">Projects</h1>
+                    </div>
 
-            <div class="grid gap-x-10 gap-y-14 sm:grid-cols-2 lg:grid-cols-3 p-8 md:p-16">
+                    <!-- Botones de Navegación Minimalistas (Anterior / Siguiente) -->
+                    <div class="flex items-center gap-2 self-end sm:self-auto">
+                        <button id="slider-prev-btn" type="button" aria-label="Anterior projecte"
+                            class="w-10 h-10 rounded-xl bg-[#FFFFFF] hover:bg-[#E8E2D8] active:scale-95 border border-[#DAD3C6] flex items-center justify-center text-[#2C2825] font-mono text-base font-bold transition-all shadow-xs cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed">
+                            <span>&larr;</span>
+                        </button>
+                        <button id="slider-next-btn" type="button" aria-label="Següent projecte"
+                            class="w-10 h-10 rounded-xl bg-[#FFFFFF] hover:bg-[#E8E2D8] active:scale-95 border border-[#DAD3C6] flex items-center justify-center text-[#2C2825] font-mono text-base font-bold transition-all shadow-xs cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed">
+                            <span>&rarr;</span>
+                        </button>
+                    </div>
+                </div>
 
-                <article class="group flex flex-col gap-4 bg-[#FFFFFF] p-5 rounded-2xl border border-[#DAD3C6] shadow-sm transition hover:shadow-md">
-                    <a href="https://github.com/fr-capllonch/practica_final_1_francesc_capllonch"
-                        class="block overflow-hidden rounded-xl border border-[#DAD3C6]">
-                        <img src="img/EcoRide.jpg" alt="Img proj 1"
-                            class="aspect-[16/10] w-full object-cover transition duration-500 group-hover:scale-105">
-                    </a>
-                    <h2 class="text-xl font-bold text-[#2C2825]" data-i18n="project.1.title">ECO RIDE: dart example project</h2>
-                    <a href="https://github.com/fr-capllonch/practica_final_1_francesc_capllonch"
-                        class="mt-auto text-sm font-semibold text-[#2C2825] hover:text-[#635E59]"
-                        data-i18n="projects.view">
-                        Veure projecte
-                        <span class="inline-block transition group-hover:translate-x-1">&rarr;</span>
-                    </a>
+                <!-- Contenedor del Slider (Carrusel Horizontal Interactivo) -->
+                <div class="relative w-full">
+                    <div id="projects-slider"
+                        class="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory no-scrollbar cursor-grab select-none pb-4 pt-1 px-1">
 
-                </article>
+                        <!-- Proyecto 1: EcoRide -->
+                        <article class="project-card group flex-shrink-0 w-full sm:w-[calc(85%)] md:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)] snap-start flex flex-col gap-4 bg-[#FFFFFF] p-5 rounded-2xl border border-[#DAD3C6] shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-md hover:border-[#CFC7B8]">
+                            <a href="https://github.com/fr-capllonch/practica_final_1_francesc_capllonch" target="_blank" rel="noopener noreferrer"
+                                class="block overflow-hidden rounded-xl border border-[#DAD3C6] bg-[#E8E2D8]">
+                                <img src="img/EcoRide.jpg" alt="EcoRide project screenshot"
+                                    class="aspect-[16/10] w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]" draggable="false">
+                            </a>
+                            <div class="flex flex-col gap-1.5">
+                                <span class="text-[11px] font-mono font-semibold uppercase tracking-wider text-[#8C857B]">Dart / Flutter</span>
+                                <h2 class="text-lg sm:text-xl font-bold font-mono text-[#2C2825] tracking-tight" data-i18n="project.1.title">ECO RIDE: dart example project</h2>
+                            </div>
+                            <a href="https://github.com/fr-capllonch/practica_final_1_francesc_capllonch" target="_blank" rel="noopener noreferrer"
+                                class="mt-auto pt-2 inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#2C2825] hover:text-[#635E59] transition-colors"
+                                data-i18n="projects.view">
+                                Veure projecte
+                                <span class="inline-block transition-transform duration-300 group-hover:translate-x-1.5">&rarr;</span>
+                            </a>
+                        </article>
 
-                <article class="group flex flex-col gap-4 bg-[#FFFFFF] p-5 rounded-2xl border border-[#DAD3C6] shadow-sm transition hover:shadow-md">
-                    <a href="https://github.com/fr-capllonch/PF1"
-                        class="block overflow-hidden rounded-xl border border-[#DAD3C6]">
-                        <img src="img/Error.jpg" alt="Img proj 1"
-                            class="aspect-[16/10] w-full object-cover transition duration-500 group-hover:scale-105">
-                    </a>
-                    <h2 class="text-xl font-bold text-[#2C2825]" data-i18n="project.2.title">LOG FILTER (with java) </h2>
-                    <a href="https://github.com/fr-capllonch/PF1"
-                        class="mt-auto text-sm font-semibold text-[#2C2825] hover:text-[#635E59]"
-                        data-i18n="projects.view">
-                        Veure projecte
-                        <span class="inline-block transition group-hover:translate-x-1">&rarr;</span>
-                    </a>
+                        <!-- Proyecto 2: Log Filter -->
+                        <article class="project-card group flex-shrink-0 w-full sm:w-[calc(85%)] md:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)] snap-start flex flex-col gap-4 bg-[#FFFFFF] p-5 rounded-2xl border border-[#DAD3C6] shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-md hover:border-[#CFC7B8]">
+                            <a href="https://github.com/fr-capllonch/PF1" target="_blank" rel="noopener noreferrer"
+                                class="block overflow-hidden rounded-xl border border-[#DAD3C6] bg-[#E8E2D8]">
+                                <img src="img/Error.jpg" alt="Log Filter project screenshot"
+                                    class="aspect-[16/10] w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]" draggable="false">
+                            </a>
+                            <div class="flex flex-col gap-1.5">
+                                <span class="text-[11px] font-mono font-semibold uppercase tracking-wider text-[#8C857B]">Java / RegEx</span>
+                                <h2 class="text-lg sm:text-xl font-bold font-mono text-[#2C2825] tracking-tight" data-i18n="project.2.title">LOG FILTER (with java)</h2>
+                            </div>
+                            <a href="https://github.com/fr-capllonch/PF1" target="_blank" rel="noopener noreferrer"
+                                class="mt-auto pt-2 inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#2C2825] hover:text-[#635E59] transition-colors"
+                                data-i18n="projects.view">
+                                Veure projecte
+                                <span class="inline-block transition-transform duration-300 group-hover:translate-x-1.5">&rarr;</span>
+                            </a>
+                        </article>
 
-                </article>
+                        <!-- Proyecto 3: Flutter Example -->
+                        <article class="project-card group flex-shrink-0 w-full sm:w-[calc(85%)] md:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)] snap-start flex flex-col gap-4 bg-[#FFFFFF] p-5 rounded-2xl border border-[#DAD3C6] shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-md hover:border-[#CFC7B8]">
+                            <a href="https://github.com/fr-capllonch/Exercici1_Flutter" target="_blank" rel="noopener noreferrer"
+                                class="block overflow-hidden rounded-xl border border-[#DAD3C6] bg-[#E8E2D8]">
+                                <img src="img/Flutter.jpg" alt="Flutter Example project screenshot"
+                                    class="aspect-[16/10] w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]" draggable="false">
+                            </a>
+                            <div class="flex flex-col gap-1.5">
+                                <span class="text-[11px] font-mono font-semibold uppercase tracking-wider text-[#8C857B]">Flutter / Dart UI</span>
+                                <h2 class="text-lg sm:text-xl font-bold font-mono text-[#2C2825] tracking-tight" data-i18n="project.3.title">FLUTTER EXAMPLE</h2>
+                            </div>
+                            <a href="https://github.com/fr-capllonch/Exercici1_Flutter" target="_blank" rel="noopener noreferrer"
+                                class="mt-auto pt-2 inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#2C2825] hover:text-[#635E59] transition-colors"
+                                data-i18n="projects.view">
+                                Veure projecte
+                                <span class="inline-block transition-transform duration-300 group-hover:translate-x-1.5">&rarr;</span>
+                            </a>
+                        </article>
 
-                <article class="group flex flex-col gap-4 bg-[#FFFFFF] p-5 rounded-2xl border border-[#DAD3C6] shadow-sm transition hover:shadow-md">
-                    <a href="https://github.com/fr-capllonch/Exercici1_Flutter"
-                        class="block overflow-hidden rounded-xl border border-[#DAD3C6]">
-                        <img src="img/Flutter.jpg" alt="Img proj 1"
-                            class="aspect-[16/10] w-full object-cover transition duration-500 group-hover:scale-105">
-                    </a>
-                    <h2 class="text-xl font-bold text-[#2C2825]" data-i18n="project.3.title">FLUTTER EXAMPLE</h2>
-                    <a href="https://github.com/fr-capllonch/Exercici1_Flutter"
-                        class="mt-auto text-sm font-semibold text-[#2C2825] hover:text-[#635E59]"
-                        data-i18n="projects.view">
-                        Veure projecte
-                        <span class="inline-block transition group-hover:translate-x-1">&rarr;</span>
-                    </a>
+                    </div>
+                </div>
 
-                </article>
-
+                <!-- Indicadores de Paginación (Dots/Pills) -->
+                <div id="slider-dots" class="flex items-center justify-center gap-2 mt-4 sm:mt-6">
+                </div>
             </div>
         </section>
 
