@@ -12,7 +12,7 @@
   // Configuración y datos del sistema
   const CONFIG = {
     username: 'visitor',
-    hostname: 'cachyos',
+    hostname: 'portfolio',
     path: '~',
     version: '2.4.1',
     bootDelay: 2000, // Espera para que el preloader de la web haya terminado
@@ -109,8 +109,8 @@
     isBooting = true;
 
     const bootLines = [
-      { text: `[  \x1b[32mOK\x1b[0m  ] Initializing CachyOS Portfolio Shell v${CONFIG.version}...`, delay: 25 },
-      { text: `[  \x1b[32mOK\x1b[0m  ] Kernel: 6.12.3-cachyos-bore (x86_64-v3)`, delay: 15 },
+      { text: `[  \x1b[32mOK\x1b[0m  ] Initializing DEV SHELL Portfolio Shell v${CONFIG.version}...`, delay: 25 },
+      { text: `[  \x1b[32mOK\x1b[0m  ] Kernel: 6.12.3-shell-bore (x86_64-v3)`, delay: 15 },
       { text: `[  \x1b[32mOK\x1b[0m  ] Loaded modules: DAM, Java, Flutter, Tailwind, Linux Kernel.`, delay: 15 },
       { text: `\x1b[36m➜\x1b[0m Session opened for user \x1b[32m${CONFIG.username}\x1b[0m@\x1b[36m${CONFIG.hostname}\x1b[0m`, delay: 20 },
       { text: `Type '\x1b[33mhelp\x1b[0m' to see available commands or click the quick buttons below.`, delay: 20 }

@@ -1,7 +1,7 @@
 const translations = {
   /* ===================== CATALÀ ===================== */
   ca: {
-    "page.title": "El meu CV",
+    "page.title": "Portfolio",
 
     // Navegació
     "nav.about": "Sobre mi",
@@ -82,7 +82,7 @@ const translations = {
 
   /* ===================== CASTELLANO ===================== */
   es: {
-    "page.title": "Mi CV",
+    "page.title": "Portfolio",
 
     // Navegación
     "nav.about": "Sobre mí",
@@ -163,7 +163,7 @@ const translations = {
 
   /* ===================== ENGLISH ===================== */
   en: {
-    "page.title": "My CV",
+    "page.title": "Portfolio",
 
     // Navigation
     "nav.about": "About Me",
