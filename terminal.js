@@ -43,7 +43,7 @@
       title: 'PORTFOLIO WEB & SHELL',
       tech: ['HTML5', 'CSS3', 'Tailwind', 'JavaScript'],
       desc: 'Portfolio personal interactivo con emulador de terminal, internacionalización y diseño responsive.',
-      url: 'https://github.com/fr-capllonch'
+      url: 'https://github.com/francesccapllonchPauCasesNoves'
     }
   ];
 
@@ -574,7 +574,7 @@
           <div><a href="https://www.linkedin.com/in/francesc-capllonch-massanet-62b5a2365/" target="_blank" rel="noopener noreferrer" class="term-link">linkedin.com/in/francesc-capllonch-massanet</a></div>
 
           <div class="text-[#635E59]">GitHub:</div>
-          <div><a href="https://github.com/fr-capllonch" target="_blank" rel="noopener noreferrer" class="term-link font-mono">github.com/fr-capllonch</a></div>
+          <div><a href="https://github.com/francesccapllonchPauCasesNoves" target="_blank" rel="noopener noreferrer" class="term-link font-mono">github.com/francesccapllonchPauCasesNoves</a></div>
 
           <div class="text-[#635E59]">Ubicación:</div>
           <div class="text-[#2C2825]">Mallorca, España 📍</div>
