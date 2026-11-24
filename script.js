@@ -363,6 +363,9 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   initProjectsSlider();
+
+  // Expose a re-init hook so api.js can refresh dots + buttons after appending GitHub cards
+  window.reinitProjectsSlider = initProjectsSlider;
 });
 
 const track = document.querySelector('.slider');

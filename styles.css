@@ -544,13 +544,12 @@ body.no-scroll {
 }
 
 /* ========================================================
-   GITHUB REPOS GRID — dynamic cards rendered by api.js
+   LANGUAGE FLAG BUTTONS — active ring highlight
    ======================================================== */
-#github-repos-grid .line-clamp-3 {
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+[data-lang][aria-pressed="true"] {
+  outline: 2px solid #2C2825;
+  outline-offset: 2px;
+  border-radius: 6px;
 }
 
 /* ========================================================
