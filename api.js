@@ -15,6 +15,24 @@
 const GITHUB_USERNAME = 'francesccapllonchPauCasesNoves';
 const GITHUB_API_URL = `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100`;
 
+let cachedReposPromise = null;
+
+/**
+ * Fetches and caches non-fork GitHub repositories so both the slider
+ * and the CachyOS terminal share a single API request.
+ */
+window.getGitHubRepos = function () {
+  if (!cachedReposPromise) {
+    cachedReposPromise = fetch(GITHUB_API_URL)
+      .then((response) => {
+        if (!response.ok) throw new Error(`GitHub API ${response.status}`);
+        return response.json();
+      })
+      .then((repos) => repos.filter((r) => !r.fork));
+  }
+  return cachedReposPromise;
+};
+
 const LANG_ICONS = {
   'JavaScript': 'fa-brands fa-js',
   'TypeScript': 'fa-brands fa-js',
@@ -138,11 +156,7 @@ async function fetchGitHubRepos() {
   if (!slider) return;
 
   try {
-    const response = await fetch(GITHUB_API_URL);
-    if (!response.ok) throw new Error(`GitHub API ${response.status}`);
-
-    const repos = await response.json();
-    const ownRepos = repos.filter(r => !r.fork);
+    const ownRepos = await window.getGitHubRepos();
 
     slider.innerHTML = '';
 

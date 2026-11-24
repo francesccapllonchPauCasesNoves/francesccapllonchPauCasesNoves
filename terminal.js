@@ -9,43 +9,16 @@
 (function () {
   'use strict';
 
-  // Configuración y datos del sistema
   const CONFIG = {
     username: 'visitor',
     hostname: 'portfolio',
     path: '~',
     version: '2.4.1',
-    bootDelay: 2000, // Espera para que el preloader de la web haya terminado
-    typeSpeed: 18,   // ms por caracter en la animación de boot
+    bootDelay: 2000,
+    typeSpeed: 18,
   };
 
-  // Base de datos de proyectos
-  const PROJECTS = [
-    {
-      title: 'ECO RIDE',
-      tech: ['Dart', 'Flutter', 'Clean Architecture'],
-      desc: 'Aplicación de movilidad sostenible desarrollada con Dart y Flutter. Implementa buenas prácticas y diseño reactivo.',
-      url: 'https://github.com/fr-capllonch/practica_final_1_francesc_capllonch'
-    },
-    {
-      title: 'LOG FILTER',
-      tech: ['Java', 'RegEx', 'Data Processing'],
-      desc: 'Herramienta de análisis y filtrado de registros de servidor en Java de alto rendimiento.',
-      url: 'https://github.com/fr-capllonch/PF1'
-    },
-    {
-      title: 'FLUTTER EXERCISE APP',
-      tech: ['Flutter', 'Dart', 'Mobile UI'],
-      desc: 'Proyecto de interfaz móvil multiplataforma explorando gestión de estado y diseño interactivo.',
-      url: 'https://github.com/fr-capllonch/Exercici1_Flutter'
-    },
-    {
-      title: 'PORTFOLIO WEB & SHELL',
-      tech: ['HTML5', 'CSS3', 'Tailwind', 'JavaScript'],
-      desc: 'Portfolio personal interactivo con emulador de terminal, internacionalización y diseño responsive.',
-      url: 'https://github.com/francesccapllonchPauCasesNoves'
-    }
-  ];
+  const GITHUB_API_FALLBACK = 'https://api.github.com/users/francesccapllonchPauCasesNoves/repos?sort=updated&per_page=100';
 
   // Estado interno de la terminal
   let history = [];
@@ -143,7 +116,6 @@
         return;
       }
 
-      // Renderizado rápido
       lineDiv.innerHTML = parseAnsiColors(formattedText);
       scrollToBottom();
       setTimeout(resolve, charDelay * 4);
@@ -166,19 +138,16 @@
    * Configuración de eventos de interacción
    */
   function setupEventListeners() {
-    // Enfocar el input al hacer clic en cualquier punto del interior de la terminal
     if (terminalBody) {
       terminalBody.addEventListener('click', () => {
         terminalInput.focus();
       });
     }
 
-    // Manejador de teclado para el input
     if (terminalInput) {
       terminalInput.addEventListener('keydown', handleKeyDown);
     }
 
-    // Botones de acceso rápido táctiles
     quickButtons.forEach((btn) => {
       btn.addEventListener('click', (e) => {
         e.preventDefault();
@@ -216,7 +185,6 @@
    * Manejador de teclas especiales (Enter, Flechas arriba/abajo, Tab)
    */
   function handleKeyDown(e) {
-    // Si aún está en boot, saltar animación inmediatamente al interactuar
     if (isBooting) {
       bootSkipped = true;
     }
@@ -456,31 +424,71 @@
   }
 
   /**
-   * COMANDO: projects
+   * COMANDO: projects (consulta la API de GitHub compartida con api.js)
    */
-  function renderProjects() {
-    let cardsHtml = PROJECTS.map((proj, idx) => `
-      <div class="term-project-card">
-        <div class="flex flex-wrap items-center justify-between gap-1 mb-1">
-          <span class="font-bold text-[#2C2825]">${idx + 1}. ${proj.title}</span>
-          <a href="${proj.url}" target="_blank" rel="noopener noreferrer" class="term-link text-xs flex items-center gap-1">
-            Ver código en GitHub <span>↗</span>
-          </a>
-        </div>
-        <p class="text-xs text-[#635E59] mb-2">${proj.desc}</p>
-        <div class="flex flex-wrap gap-1">
-          ${proj.tech.map(t => `<span class="term-tag">${t}</span>`).join('')}
-        </div>
-      </div>
-    `).join('');
+  async function renderProjects() {
+    const outputBlock = document.createElement('div');
+    outputBlock.className = 'terminal-output-block mb-3';
+    outputBlock.innerHTML = `<div class="term-muted text-xs">Consultando repositorios en GitHub API...</div>`;
+    terminalOutput.appendChild(outputBlock);
+    scrollToBottom();
 
-    const html = `
-      <div>
-        <div class="term-highlight font-bold mb-2">Proyectos Destacados en GitHub:</div>
-        ${cardsHtml}
-      </div>
-    `;
-    printOutput(html);
+    try {
+      const repos = typeof window.getGitHubRepos === 'function'
+        ? await window.getGitHubRepos()
+        : await fetch(GITHUB_API_FALLBACK)
+            .then((res) => {
+              if (!res.ok) throw new Error(`GitHub API ${res.status}`);
+              return res.json();
+            })
+            .then((data) => data.filter((r) => !r.fork));
+
+      if (!repos || repos.length === 0) {
+        outputBlock.innerHTML = `<div class="term-warning text-xs">No se encontraron repositorios públicos.</div>`;
+        scrollToBottom();
+        return;
+      }
+
+      const cardsHtml = repos.map((repo, idx) => {
+        const tags = [];
+        if (repo.language) tags.push(repo.language);
+        if (Array.isArray(repo.topics)) {
+          repo.topics.slice(0, 3).forEach((t) => {
+            if (!tags.includes(t)) tags.push(t);
+          });
+        }
+        const desc = repo.description
+          ? escapeHtml(repo.description)
+          : 'Sin descripción disponible.';
+
+        return `
+          <div class="term-project-card">
+            <div class="flex flex-wrap items-center justify-between gap-1 mb-1">
+              <span class="font-bold text-[#2C2825]">${idx + 1}. ${escapeHtml(repo.name)}</span>
+              <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="term-link text-xs flex items-center gap-1">
+                Ver código en GitHub <span>↗</span>
+              </a>
+            </div>
+            <p class="text-xs text-[#635E59] mb-2">${desc}</p>
+            ${tags.length > 0 ? `
+              <div class="flex flex-wrap gap-1">
+                ${tags.map(t => `<span class="term-tag">${escapeHtml(t)}</span>`).join('')}
+              </div>` : ''}
+          </div>
+        `;
+      }).join('');
+
+      outputBlock.innerHTML = `
+        <div>
+          <div class="term-highlight font-bold mb-2">Repositorios en GitHub (${repos.length}):</div>
+          ${cardsHtml}
+        </div>
+      `;
+      scrollToBottom();
+    } catch (err) {
+      outputBlock.innerHTML = `<div class="term-error text-xs">Error al consultar la API de GitHub: ${escapeHtml(err.message)}</div>`;
+      scrollToBottom();
+    }
   }
 
   /**
@@ -659,7 +667,6 @@
       .replace(/'/g, '&#039;');
   }
 
-  // Exportar helper a ventana para enlaces clickeables interactivos
   window.TerminalRun = function (cmd) {
     executeCommandDirectly(cmd);
   };
