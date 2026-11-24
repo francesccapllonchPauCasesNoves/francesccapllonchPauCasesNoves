@@ -1,8 +1,8 @@
 /**
  * api.js — GitHub Repositories API fetch
  *
- * Fetches repos from GitHub and appends them into #projects-slider
- * using exactly the same card style as the hand-crafted project cards.
+ * Fetches repos from GitHub and renders ONLY API-fetched cards
+ * inside #projects-slider with a 100% uniform card layout.
  * After injection, refreshes the slider pagination dots & arrows.
  *
  * IMAGE CONVENTION:
@@ -45,22 +45,29 @@ function createPlaceholderLink(url) {
   el.href = url;
   el.target = '_blank';
   el.rel = 'noopener noreferrer';
-  el.className = 'block overflow-hidden rounded-2xl border border-[#DAD3C6] bg-[#E8E2D8]';
-  el.style.cssText = 'aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0.5rem;';
+  el.className = 'block overflow-hidden rounded-2xl border border-[#DAD3C6] bg-[#E8E2D8] aspect-[16/10] w-full flex flex-col items-center justify-center gap-2';
   el.innerHTML = `
-    <i class="fa-brands fa-github" style="font-size:2.5rem;color:#8C857B;"></i>
-    <span style="font-size:0.65rem;font-family:monospace;color:#8C857B;letter-spacing:0.05em;text-transform:uppercase;">
+    <i class="fa-brands fa-github text-4xl text-[#8C857B]"></i>
+    <span class="text-[10px] font-mono text-[#8C857B] tracking-wider uppercase">
       github.com/${GITHUB_USERNAME}
     </span>`;
   return el;
 }
 
+function getViewProjectLabel() {
+  const lang = document.documentElement.lang || localStorage.getItem('lang') || 'ca';
+  if (typeof translations !== 'undefined' && translations[lang] && translations[lang]['projects.view']) {
+    return translations[lang]['projects.view'];
+  }
+  return 'Veure projecte';
+}
+
 function buildSliderCard(repo) {
   const name = repo.name || '—';
   const desc = repo.description || '';
-  const language = repo.language || null;
+  const language = repo.language || 'Repository';
   const url = repo.html_url;
-  const langIcon = getLangIcon(language);
+  const langIcon = getLangIcon(repo.language);
 
   const article = document.createElement('article');
   article.className =
@@ -102,12 +109,15 @@ function buildSliderCard(repo) {
   imgLink.appendChild(img);
   article.appendChild(imgLink);
 
+  // Uniform middle block across all cards
   const textDiv = document.createElement('div');
-  textDiv.className = 'flex flex-col gap-1.5';
+  textDiv.className = 'flex flex-col gap-1.5 flex-1';
   textDiv.innerHTML = `
-    ${language ? `<span class="text-[11px] font-mono font-semibold uppercase tracking-wider text-[#8C857B]"><i class="${langIcon}"></i> ${language}</span>` : ''}
-    <h2 class="text-lg sm:text-xl font-bold font-mono text-[#2C2825] tracking-tight break-words">${name}</h2>
-    ${desc ? `<p class="text-xs text-[#635E59] leading-relaxed" style="display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">${desc}</p>` : ''}`;
+    <span class="text-[11px] font-mono font-semibold uppercase tracking-wider text-[#8C857B]">
+      <i class="${langIcon} mr-1"></i>${language}
+    </span>
+    <h2 class="text-lg sm:text-xl font-bold font-mono text-[#2C2825] tracking-tight truncate" title="${name}">${name}</h2>
+    <p class="text-xs text-[#635E59] leading-relaxed min-h-[2.25rem]" style="display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">${desc}</p>`;
   article.appendChild(textDiv);
 
   const link = document.createElement('a');
@@ -115,7 +125,7 @@ function buildSliderCard(repo) {
   link.target = '_blank';
   link.rel = 'noopener noreferrer';
   link.className = 'mt-auto pt-2 inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#2C2825] hover:text-[#635E59] transition-colors';
-  link.innerHTML = `View on GitHub <span class="inline-block transition-transform duration-300 group-hover:translate-x-1.5">&rarr;</span>`;
+  link.innerHTML = `<span data-i18n="projects.view">${getViewProjectLabel()}</span> <span class="inline-block transition-transform duration-300 group-hover:translate-x-1.5">&rarr;</span>`;
   article.appendChild(link);
 
   return article;
@@ -131,15 +141,24 @@ async function fetchGitHubRepos() {
 
     const repos = await response.json();
     const ownRepos = repos.filter(r => !r.fork);
-    if (ownRepos.length === 0) return;
 
-    ownRepos.forEach(repo => slider.appendChild(buildSliderCard(repo)));
+    slider.innerHTML = '';
+
+    if (ownRepos.length === 0) {
+      slider.innerHTML = `<p class="w-full py-12 text-center text-sm text-[#8C857B] font-mono">No public repositories found.</p>`;
+    } else {
+      ownRepos.forEach(repo => slider.appendChild(buildSliderCard(repo)));
+    }
 
     if (typeof window.refreshProjectsSlider === 'function') {
       window.refreshProjectsSlider();
     }
   } catch (err) {
     console.warn('fetchGitHubRepos:', err.message);
+    slider.innerHTML = `<p class="w-full py-12 text-center text-sm text-[#8C857B] font-mono">Could not load repositories.</p>`;
+    if (typeof window.refreshProjectsSlider === 'function') {
+      window.refreshProjectsSlider();
+    }
   }
 }
 
