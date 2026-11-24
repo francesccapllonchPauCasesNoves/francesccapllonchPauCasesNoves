@@ -1,22 +1,3 @@
-<!-- Coses a fer:
- 
-- Posar iconos a l'apartat de skills i formacio, han de estar a l'esquerra del text
-
-- Cambiar les llegnues per banderes
-
-- Corregir apartat competencies
-
-- Enmarcar skills i formacio correctament
-
-- Implementar API per projectes
-
-- Implementar missatgeria
-
-
--->
-
-
-
 <!DOCTYPE html>
 <html>
 
@@ -32,11 +13,17 @@
     <script src="script.js" defer></script>
     <script src="terminal.js" defer></script>
     <script src="animacionInicial.js"> </script>
+    <script src="api.js"></script>
+    <script src="cardsInitializer.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
         rel="stylesheet">
+    <!-- FontAwesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <!-- flag-icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -124,7 +111,7 @@
         <!-- Menú Desplegable Móvil -->
         <div id="mobile-menu"
             class="hidden md:hidden absolute top-16  left-0 w-full bg-[#F7F4EE] border-b border-[#DAD3C6] px-6 py-4 shadow-lg backdrop-blur-md">
-            
+
             <nav class="flex flex-col gap-2 font-mono text-sm">
                 <a href="#terminal-section"
                     class="mobile-nav-link py-2 px-3 rounded-lg hover:bg-[#F4F1EC] text-[#2C2825] font-semibold flex items-center justify-between">
@@ -373,53 +360,41 @@
                         data-i18n="skills_section.title">Habilitats i Formació</h1>
                 </div>
 
-                <!-- Soft Skills: Diseño limpio en grid compacto -->
+                <!-- Soft Skills: grid compacte amb icones FA -->
                 <div class="mb-6 sm:mb-8">
                     <h2 class="text-base sm:text-lg font-bold text-[#2C2825] mb-3 flex items-center gap-2">
                         <span class="w-2.5 h-2.5 rounded-full bg-[#2C2825] animate-pulse"></span>
                         <span data-i18n="skills.title">Habilitats</span>
                     </h2>
                     <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-                        <div
-                            class="bg-[#FFFFFF] p-3.5 sm:p-4 rounded-2xl border border-[#DAD3C6] shadow-xs flex items-center gap-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:border-[#CFC7B8]">
-                            <span
-                                class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#F4F1EC] border border-[#DAD3C6] flex items-center justify-center text-xs font-bold font-mono text-[#2C2825]">01</span>
-                            <p class="font-bold text-xs sm:text-sm text-[#2C2825]" data-i18n="skill.1">Pensament crític
-                            </p>
+                        <div class="bg-[#FFFFFF] p-3.5 sm:p-4 rounded-2xl border border-[#DAD3C6] shadow-xs flex items-center gap-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:border-[#CFC7B8]">
+                            <span class="w-9 h-9 rounded-xl bg-[#F4F1EC] border border-[#DAD3C6] flex items-center justify-center text-[#635E59] flex-shrink-0"><i class="fa-solid fa-brain text-sm"></i></span>
+                            <p class="font-bold text-xs sm:text-sm text-[#2C2825]" data-i18n="skill.1">Pensament crític</p>
                         </div>
-                        <div
-                            class="bg-[#FFFFFF] p-3.5 sm:p-4 rounded-2xl border border-[#DAD3C6] shadow-xs flex items-center gap-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:border-[#CFC7B8]">
-                            <span
-                                class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#F4F1EC] border border-[#DAD3C6] flex items-center justify-center text-xs font-bold font-mono text-[#2C2825]">02</span>
-                            <p class="font-bold text-xs sm:text-sm text-[#2C2825]" data-i18n="skill.2">Mentalitat de
-                                seguretat</p>
+                        <div class="bg-[#FFFFFF] p-3.5 sm:p-4 rounded-2xl border border-[#DAD3C6] shadow-xs flex items-center gap-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:border-[#CFC7B8]">
+                            <span class="w-9 h-9 rounded-xl bg-[#F4F1EC] border border-[#DAD3C6] flex items-center justify-center text-[#635E59] flex-shrink-0"><i class="fa-solid fa-shield-halved text-sm"></i></span>
+                            <p class="font-bold text-xs sm:text-sm text-[#2C2825]" data-i18n="skill.2">Mentalitat de seguretat</p>
                         </div>
-                        <div
-                            class="bg-[#FFFFFF] p-3.5 sm:p-4 rounded-2xl border border-[#DAD3C6] shadow-xs flex items-center gap-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:border-[#CFC7B8]">
-                            <span
-                                class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#F4F1EC] border border-[#DAD3C6] flex items-center justify-center text-xs font-bold font-mono text-[#2C2825]">03</span>
-                            <p class="font-bold text-xs sm:text-sm text-[#2C2825]" data-i18n="skill.3">Atenció al detall
-                            </p>
+                        <div class="bg-[#FFFFFF] p-3.5 sm:p-4 rounded-2xl border border-[#DAD3C6] shadow-xs flex items-center gap-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:border-[#CFC7B8]">
+                            <span class="w-9 h-9 rounded-xl bg-[#F4F1EC] border border-[#DAD3C6] flex items-center justify-center text-[#635E59] flex-shrink-0"><i class="fa-solid fa-magnifying-glass text-sm"></i></span>
+                            <p class="font-bold text-xs sm:text-sm text-[#2C2825]" data-i18n="skill.3">Atenció al detall</p>
                         </div>
-                        <div
-                            class="bg-[#FFFFFF] p-3.5 sm:p-4 rounded-2xl border border-[#DAD3C6] shadow-xs flex items-center gap-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:border-[#CFC7B8]">
-                            <span
-                                class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#F4F1EC] border border-[#DAD3C6] flex items-center justify-center text-xs font-bold font-mono text-[#2C2825]">04</span>
-                            <p class="font-bold text-xs sm:text-sm text-[#2C2825]" data-i18n="skill.4">Gestió de
-                                prioritats</p>
+                        <div class="bg-[#FFFFFF] p-3.5 sm:p-4 rounded-2xl border border-[#DAD3C6] shadow-xs flex items-center gap-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:border-[#CFC7B8]">
+                            <span class="w-9 h-9 rounded-xl bg-[#F4F1EC] border border-[#DAD3C6] flex items-center justify-center text-[#635E59] flex-shrink-0"><i class="fa-solid fa-list-check text-sm"></i></span>
+                            <p class="font-bold text-xs sm:text-sm text-[#2C2825]" data-i18n="skill.4">Gestió de prioritats</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Grid principal para contenido técnico y formativo -->
+                <!-- Grid principal per a contingut tècnic i formatiu -->
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6 items-start">
-                    <!-- Columna Izquierda: Conocimientos + Competencias (7 columnas) -->
+                    <!-- Columna Esquerra: Coneixements + Competències (7 cols) -->
                     <div class="lg:col-span-7 flex flex-col gap-5 lg:gap-6">
-                        <!-- IT & Programming Knowledge -->
-                        <article
-                            class="bg-[#FFFFFF] p-6 sm:p-7 rounded-3xl border border-[#DAD3C6] shadow-sm relative overflow-hidden flex flex-col gap-3.5 transition-all duration-300 hover:shadow-md hover:border-[#CFC7B8]">
-                            <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-[#2C2825]"
-                                data-i18n="knowledge.title">
+
+                        <!-- IT & Programming Knowledge — bloc emmarcat -->
+                        <article class="bg-[#FFFFFF] p-6 sm:p-7 rounded-3xl border border-[#DAD3C6] shadow-sm relative overflow-hidden flex flex-col gap-3.5 transition-all duration-300 hover:shadow-md hover:border-[#CFC7B8]">
+                            <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-[#2C2825] flex items-center gap-2.5" data-i18n="knowledge.title">
+                                <i class="fa-solid fa-laptop-code text-base text-[#8C857B]"></i>
                                 Coneixements d'informàtica i programació
                             </h2>
                             <p class="text-xs sm:text-sm text-[#2C2825] leading-normal" data-i18n="knowledge.text">
@@ -429,117 +404,104 @@
                                 <strong>MySQL</strong> and <strong>MongoDB</strong>,
                                 with an active self-learning focus on <strong>Cybersecurity</strong>.
                             </p>
-                            <div data-i18n="knowledge.langs"
-                                class="p-3 bg-[#F4F1EC] rounded-2xl border border-[#DAD3C6] text-xs sm:text-sm font-mono text-[#2C2825]">
+                            <div data-i18n="knowledge.langs" class="p-3 bg-[#F4F1EC] rounded-2xl border border-[#DAD3C6] text-xs sm:text-sm font-mono text-[#2C2825]">
                                 Programming Languages: Java, JavaScript, HTML, CSS, SQL
                             </div>
                         </article>
 
-                        <!-- Competències: 2x2 Grid -->
-                        <article
-                            class="bg-[#FFFFFF] p-6 sm:p-7 rounded-3xl border border-[#DAD3C6] shadow-sm relative overflow-hidden flex flex-col gap-3.5 transition-all duration-300 hover:shadow-md hover:border-[#CFC7B8]">
-                            <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-[#2C2825]"
-                                data-i18n="competences.title">
+                        <!-- Competències — estil unificat, icones FA -->
+                        <article class="bg-[#FFFFFF] p-6 sm:p-7 rounded-3xl border border-[#DAD3C6] shadow-sm relative overflow-hidden flex flex-col gap-3.5 transition-all duration-300 hover:shadow-md hover:border-[#CFC7B8]">
+                            <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-[#2C2825] flex items-center gap-2.5" data-i18n="competences.title">
+                                <i class="fa-solid fa-layer-group text-base text-[#8C857B]"></i>
                                 Competències
                             </h2>
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                <div
-                                    class="flex items-start gap-3 p-3.5 bg-[#F4F1EC] rounded-2xl border border-[#DAD3C6]">
-                                    <span class="w-2.5 h-2.5 mt-1 bg-[#CFC7B8] rounded-full flex-shrink-0"></span>
+                                <div class="flex items-start gap-3 p-3.5 bg-[#F4F1EC] rounded-2xl border border-[#DAD3C6]">
+                                    <span class="w-8 h-8 rounded-xl bg-[#E8E2D8] border border-[#DAD3C6] flex items-center justify-center text-[#635E59] flex-shrink-0 mt-0.5"><i class="fa-solid fa-code text-xs"></i></span>
                                     <div>
-                                        <h3 class="font-bold text-xs sm:text-sm text-[#2C2825]"
-                                            data-i18n="comp.1.title">Front-End Web Development</h3>
-                                        <p class="text-[11px] text-[#635E59] mt-0.5" data-i18n="comp.1.desc">Frontend UI
-                                            layout</p>
+                                        <h3 class="font-bold text-xs sm:text-sm text-[#2C2825]" data-i18n="comp.1.title">Front-End Web Development</h3>
+                                        <p class="text-[11px] text-[#635E59] mt-0.5 leading-snug" data-i18n="comp.1.desc">Frontend UI layout</p>
                                     </div>
                                 </div>
-                                <div
-                                    class="flex items-start gap-3 p-3.5 bg-[#F4F1EC] rounded-2xl border border-[#DAD3C6]">
-                                    <span class="w-2.5 h-2.5 mt-1 bg-[#CFC7B8] rounded-full flex-shrink-0"></span>
+                                <div class="flex items-start gap-3 p-3.5 bg-[#F4F1EC] rounded-2xl border border-[#DAD3C6]">
+                                    <span class="w-8 h-8 rounded-xl bg-[#E8E2D8] border border-[#DAD3C6] flex items-center justify-center text-[#635E59] flex-shrink-0 mt-0.5"><i class="fa-solid fa-database text-xs"></i></span>
                                     <div>
-                                        <h3 class="font-bold text-xs sm:text-sm text-[#2C2825]"
-                                            data-i18n="comp.2.title">Database Management</h3>
-                                        <p class="text-[11px] text-[#635E59] mt-0.5" data-i18n="comp.2.desc">Relational
-                                            (SQL) &amp; NoSQL database design</p>
+                                        <h3 class="font-bold text-xs sm:text-sm text-[#2C2825]" data-i18n="comp.2.title">Database Management</h3>
+                                        <p class="text-[11px] text-[#635E59] mt-0.5 leading-snug" data-i18n="comp.2.desc">Relational (SQL) &amp; NoSQL database design</p>
                                     </div>
                                 </div>
-                                <div
-                                    class="flex items-start gap-3 p-3.5 bg-[#F4F1EC] rounded-2xl border border-[#DAD3C6]">
-                                    <span class="w-2.5 h-2.5 mt-1 bg-[#CFC7B8] rounded-full flex-shrink-0"></span>
+                                <div class="flex items-start gap-3 p-3.5 bg-[#F4F1EC] rounded-2xl border border-[#DAD3C6]">
+                                    <span class="w-8 h-8 rounded-xl bg-[#E8E2D8] border border-[#DAD3C6] flex items-center justify-center text-[#635E59] flex-shrink-0 mt-0.5"><i class="fa-solid fa-lock text-xs"></i></span>
                                     <div>
-                                        <h3 class="font-bold text-xs sm:text-sm text-[#2C2825]"
-                                            data-i18n="comp.3.title">Security</h3>
-                                        <p class="text-[11px] text-[#635E59] mt-0.5" data-i18n="comp.3.desc">Basic
-                                            security practices</p>
+                                        <h3 class="font-bold text-xs sm:text-sm text-[#2C2825]" data-i18n="comp.3.title">Security</h3>
+                                        <p class="text-[11px] text-[#635E59] mt-0.5 leading-snug" data-i18n="comp.3.desc">Basic security practices</p>
                                     </div>
                                 </div>
-                                <div
-                                    class="flex items-start gap-3 p-3.5 bg-[#F4F1EC] rounded-2xl border border-[#DAD3C6]">
-                                    <span class="w-2.5 h-2.5 mt-1 bg-[#CFC7B8] rounded-full flex-shrink-0"></span>
+                                <div class="flex items-start gap-3 p-3.5 bg-[#F4F1EC] rounded-2xl border border-[#DAD3C6]">
+                                    <span class="w-8 h-8 rounded-xl bg-[#E8E2D8] border border-[#DAD3C6] flex items-center justify-center text-[#635E59] flex-shrink-0 mt-0.5"><i class="fa-brands fa-git-alt text-xs"></i></span>
                                     <div>
-                                        <h3 class="font-bold text-xs sm:text-sm text-[#2C2825]"
-                                            data-i18n="comp.4.title">Version Control &amp; Workflow</h3>
-                                        <p class="text-[11px] text-[#635E59] mt-0.5" data-i18n="comp.4.desc">Git, GitHub
-                                            &amp; team collaboration tools</p>
+                                        <h3 class="font-bold text-xs sm:text-sm text-[#2C2825]" data-i18n="comp.4.title">Version Control &amp; Workflow</h3>
+                                        <p class="text-[11px] text-[#635E59] mt-0.5 leading-snug" data-i18n="comp.4.desc">Git, GitHub &amp; team collaboration tools</p>
                                     </div>
                                 </div>
                             </div>
                         </article>
                     </div>
 
-                    <!-- Columna Derecha: Certificaciones + Idiomas (5 columnas) -->
+                    <!-- Columna Dreta: Certificacions + Idiomes (5 cols) -->
                     <div class="lg:col-span-5 flex flex-col gap-5 lg:gap-6">
-                        <!-- Certificaciones y titulaciones -->
-                        <article
-                            class="bg-[#FFFFFF] p-6 sm:p-7 rounded-3xl border border-[#DAD3C6] shadow-sm relative overflow-hidden flex flex-col gap-3.5 transition-all duration-300 hover:shadow-md hover:border-[#CFC7B8]">
-                            <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-[#2C2825]"
-                                data-i18n="certs.title">
+
+                        <!-- Certificacions — bloc emmarcat amb icones FA -->
+                        <article class="bg-[#FFFFFF] p-6 sm:p-7 rounded-3xl border border-[#DAD3C6] shadow-sm relative overflow-hidden flex flex-col gap-3.5 transition-all duration-300 hover:shadow-md hover:border-[#CFC7B8]">
+                            <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-[#2C2825] flex items-center gap-2.5" data-i18n="certs.title">
+                                <i class="fa-solid fa-certificate text-base text-[#8C857B]"></i>
                                 Certificacions i titulacions
                             </h2>
                             <ul class="space-y-2.5 text-xs sm:text-sm text-[#2C2825]">
                                 <li class="flex items-start gap-3 p-3 bg-[#F4F1EC] rounded-2xl border border-[#DAD3C6]">
-                                    <span class="text-[#2C2825] font-bold font-mono text-xs">01.</span>
-                                    <span data-i18n="cert.1">Technician in Microcomputer Systems and Networks - EQF
-                                        Level 4</span>
+                                    <span class="w-7 h-7 rounded-lg bg-[#E8E2D8] border border-[#DAD3C6] flex items-center justify-center flex-shrink-0 mt-0.5"><i class="fa-solid fa-network-wired text-[10px] text-[#635E59]"></i></span>
+                                    <span data-i18n="cert.1">Technician in Microcomputer Systems and Networks - EQF Level 4</span>
                                 </li>
                                 <li class="flex items-start gap-3 p-3 bg-[#F4F1EC] rounded-2xl border border-[#DAD3C6]">
-                                    <span class="text-[#2C2825] font-bold font-mono text-xs">02.</span>
+                                    <span class="w-7 h-7 rounded-lg bg-[#E8E2D8] border border-[#DAD3C6] flex items-center justify-center flex-shrink-0 mt-0.5"><i class="fa-solid fa-route text-[10px] text-[#635E59]"></i></span>
                                     <span data-i18n="cert.2">Introduction to Cisco Packet Tracer</span>
                                 </li>
                                 <li class="flex items-start gap-3 p-3 bg-[#F4F1EC] rounded-2xl border border-[#DAD3C6]">
-                                    <span class="text-[#2C2825] font-bold font-mono text-xs">03.</span>
-                                    <span data-i18n="cert.3">Cisco Introduction to Cibersecurity</span>
+                                    <span class="w-7 h-7 rounded-lg bg-[#E8E2D8] border border-[#DAD3C6] flex items-center justify-center flex-shrink-0 mt-0.5"><i class="fa-solid fa-user-shield text-[10px] text-[#635E59]"></i></span>
+                                    <span data-i18n="cert.3">Cisco Introduction to Cybersecurity</span>
                                 </li>
                             </ul>
                         </article>
 
-                        <!-- Idiomas -->
-                        <article
-                            class="bg-[#FFFFFF] p-6 sm:p-7 rounded-3xl border border-[#DAD3C6] shadow-sm relative overflow-hidden flex flex-col gap-3.5 transition-all duration-300 hover:shadow-md hover:border-[#CFC7B8]">
-                            <span
-                                class="absolute top-4 right-5 text-5xl font-mono font-black text-[#DAD3C6]/25 select-none pointer-events-none">&gt;_</span>
-                            <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-[#2C2825]"
-                                data-i18n="languages.title">
+                        <!-- Idiomes — banderes amb flag-icons -->
+                        <article class="bg-[#FFFFFF] p-6 sm:p-7 rounded-3xl border border-[#DAD3C6] shadow-sm relative overflow-hidden flex flex-col gap-3.5 transition-all duration-300 hover:shadow-md hover:border-[#CFC7B8]">
+                            <span class="absolute top-4 right-5 text-5xl font-mono font-black text-[#DAD3C6]/25 select-none pointer-events-none">&gt;_</span>
+                            <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-[#2C2825] flex items-center gap-2.5" data-i18n="languages.title">
+                                <i class="fa-solid fa-earth-europe text-base text-[#8C857B]"></i>
                                 Idiomes
                             </h2>
                             <ul class="space-y-2.5 text-xs sm:text-sm text-[#2C2825]">
-                                <li
-                                    class="flex items-center justify-between p-3 bg-[#F4F1EC] rounded-2xl border border-[#DAD3C6]">
-                                    <span class="font-semibold" data-i18n="lang.en">English - Medium Level</span>
-                                    <span
-                                        class="px-2.5 py-1 text-xs font-mono font-bold bg-[#E8E2D8] border border-[#DAD3C6] rounded-xl">B1/B2</span>
+                                <li class="flex items-center justify-between p-3 bg-[#F4F1EC] rounded-2xl border border-[#DAD3C6]">
+                                    <span class="flex items-center gap-2.5 font-semibold">
+                                        <span class="fi fi-gb rounded" style="font-size:1.3em;"></span>
+                                        <span data-i18n="lang.en">English - Medium Level</span>
+                                    </span>
+                                    <span class="px-2.5 py-1 text-xs font-mono font-bold bg-[#E8E2D8] border border-[#DAD3C6] rounded-xl flex-shrink-0">B1/B2</span>
                                 </li>
-                                <li
-                                    class="flex items-center justify-between p-3 bg-[#F4F1EC] rounded-2xl border border-[#DAD3C6]">
-                                    <span class="font-semibold" data-i18n="lang.es">Spanish - Native</span>
-                                    <span
-                                        class="px-2.5 py-1 text-xs font-mono font-bold bg-[#E8E2D8] border border-[#DAD3C6] rounded-xl">Natiu</span>
+                                <li class="flex items-center justify-between p-3 bg-[#F4F1EC] rounded-2xl border border-[#DAD3C6]">
+                                    <span class="flex items-center gap-2.5 font-semibold">
+                                        <span class="fi fi-es rounded" style="font-size:1.3em;"></span>
+                                        <span data-i18n="lang.es">Spanish - Native</span>
+                                    </span>
+                                    <span class="px-2.5 py-1 text-xs font-mono font-bold bg-[#E8E2D8] border border-[#DAD3C6] rounded-xl flex-shrink-0">Natiu</span>
                                 </li>
-                                <li
-                                    class="flex items-center justify-between p-3 bg-[#F4F1EC] rounded-2xl border border-[#DAD3C6]">
-                                    <span class="font-semibold" data-i18n="lang.ca">Catalan - Native</span>
-                                    <span
-                                        class="px-2.5 py-1 text-xs font-mono font-bold bg-[#E8E2D8] border border-[#DAD3C6] rounded-xl">Natiu</span>
+                                <li class="flex items-center justify-between p-3 bg-[#F4F1EC] rounded-2xl border border-[#DAD3C6]">
+                                    <span class="flex items-center gap-2.5 font-semibold">
+                                        <!-- Català usa bandera d'Espanya (no té codi ISO propi) -->
+                                        <span class="fi fi-es-ct rounded" style="font-size:1.3em;"></span>
+                                        <span data-i18n="lang.ca">Catalan - Native</span>
+                                    </span>
+                                    <span class="px-2.5 py-1 text-xs font-mono font-bold bg-[#E8E2D8] border border-[#DAD3C6] rounded-xl flex-shrink-0">Natiu</span>
                                 </li>
                             </ul>
                         </article>
@@ -665,6 +627,24 @@
                 <!-- Indicadores de Paginación (Dots/Pills) -->
                 <div id="slider-dots" class="flex items-center justify-center gap-2 mt-4 sm:mt-6">
                 </div>
+
+                <!-- GitHub Repositories — rendered dynamically by api.js -->
+                <div class="mt-10 sm:mt-12">
+                    <div class="flex items-center gap-3 mb-5">
+                        <span class="w-2.5 h-2.5 rounded-full bg-[#2C2825] animate-pulse"></span>
+                        <h2 class="text-base sm:text-lg font-bold text-[#2C2825] flex items-center gap-2">
+                            <i class="fa-brands fa-github text-[#635E59]"></i>
+                            <span>GitHub Repositories</span>
+                        </h2>
+                    </div>
+                    <div id="github-repos-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <!-- Loaded by fetchGitHubRepos() in api.js -->
+                        <div class="col-span-full text-center py-8 text-[#8C857B] text-sm font-mono animate-pulse">
+                            <i class="fa-brands fa-github text-2xl mb-2 block"></i>
+                            Loading repositories…
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -785,72 +765,69 @@
                         </div>
                     </aside>
 
-                    <!-- Columna 2: Formulario Completo de Contacto (7 cols) -->
-                    <!-- <article
-                        class="contact-form-card lg:col-span-7 bg-[#FFFFFF] p-7 sm:p-9 lg:p-10 rounded-3xl border border-[#DAD3C6] shadow-sm relative overflow-hidden flex flex-col justify-between h-full">
-                        <span
-                            class="absolute top-4 right-6 text-5xl font-mono font-black text-[#DAD3C6]/20 select-none pointer-events-none">&gt;_</span>
+                    <!-- Columna 2: Formulari de Contacte (7 cols) — Formspree -->
+                    <article class="lg:col-span-7 bg-[#FFFFFF] p-7 sm:p-9 lg:p-10 rounded-3xl border border-[#DAD3C6] shadow-sm relative overflow-hidden flex flex-col justify-between h-full">
+                        <span class="absolute top-4 right-6 text-5xl font-mono font-black text-[#DAD3C6]/20 select-none pointer-events-none">&gt;_</span>
 
                         <div>
                             <div class="flex items-center gap-2 mb-6">
                                 <span class="w-2.5 h-2.5 rounded-full bg-[#CFC7B8]"></span>
-                                <h3 class="text-xs uppercase tracking-widest font-mono text-[#8C857B] font-bold">Send
-                                    Message</h3>
+                                <h3 class="text-xs uppercase tracking-widest font-mono text-[#8C857B] font-bold">Send Message</h3>
                             </div>
 
-                            <form id="contact-form" class="contact-form flex flex-col gap-4" action="#" method="POST">
-                                
-                                <div class="form-group flex flex-col gap-1.5">
+                            <!-- action apunta a Formspree — canvia YOUR_FORM_ID pel teu id real -->
+                            <form id="contact-form" class="flex flex-col gap-4"
+                                  action="https://formspree.io/f/YOUR_FORM_ID"
+                                  method="POST"
+                                  novalidate>
+
+                                <div class="flex flex-col gap-1.5">
                                     <label for="contact-name"
-                                        class="form-label text-xs font-mono font-semibold uppercase tracking-wider text-[#8C857B]"
+                                        class="text-xs font-mono font-semibold uppercase tracking-wider text-[#8C857B]"
                                         data-i18n="contact.name_label">Nom complet</label>
                                     <input type="text" id="contact-name" name="nom"
-                                        class="form-input w-full bg-[#F4F1EC] border border-[#DAD3C6] rounded-xl p-3 text-sm font-mono text-[#2C2825] focus:bg-[#FFFFFF] focus:border-[#2C2825] transition"
-                                        placeholder="El teu nom" required autocomplete="name" />
+                                        class="w-full bg-[#F4F1EC] border border-[#DAD3C6] rounded-xl p-3 text-sm font-mono text-[#2C2825] focus:outline-none focus:bg-[#FFFFFF] focus:border-[#2C2825] transition placeholder:text-[#8C857B]"
+                                        placeholder="El teu nom" required autocomplete="name">
                                 </div>
 
-                                
-                                <div class="form-group flex flex-col gap-1.5">
+                                <div class="flex flex-col gap-1.5">
                                     <label for="contact-email"
-                                        class="form-label text-xs font-mono font-semibold uppercase tracking-wider text-[#8C857B]"
+                                        class="text-xs font-mono font-semibold uppercase tracking-wider text-[#8C857B]"
                                         data-i18n="contact.email_label">Correu electrònic</label>
                                     <input type="email" id="contact-email" name="email"
-                                        class="form-input w-full bg-[#F4F1EC] border border-[#DAD3C6] rounded-xl p-3 text-sm font-mono text-[#2C2825] focus:bg-[#FFFFFF] focus:border-[#2C2825] transition"
-                                        placeholder="el-teu-email@exemple.com" required autocomplete="email" />
+                                        class="w-full bg-[#F4F1EC] border border-[#DAD3C6] rounded-xl p-3 text-sm font-mono text-[#2C2825] focus:outline-none focus:bg-[#FFFFFF] focus:border-[#2C2825] transition placeholder:text-[#8C857B]"
+                                        placeholder="el-teu-email@exemple.com" required autocomplete="email">
                                 </div>
 
-                                
-                                <div class="form-group flex flex-col gap-1.5">
+                                <div class="flex flex-col gap-1.5">
                                     <label for="contact-subject"
-                                        class="form-label text-xs font-mono font-semibold uppercase tracking-wider text-[#8C857B]"
+                                        class="text-xs font-mono font-semibold uppercase tracking-wider text-[#8C857B]"
                                         data-i18n="contact.subject_label">Assumpte</label>
                                     <input type="text" id="contact-subject" name="assumpte"
-                                        class="form-input w-full bg-[#F4F1EC] border border-[#DAD3C6] rounded-xl p-3 text-sm font-mono text-[#2C2825] focus:bg-[#FFFFFF] focus:border-[#2C2825] transition"
-                                        placeholder="Motiu del contacte o proposta de projecte" required />
+                                        class="w-full bg-[#F4F1EC] border border-[#DAD3C6] rounded-xl p-3 text-sm font-mono text-[#2C2825] focus:outline-none focus:bg-[#FFFFFF] focus:border-[#2C2825] transition placeholder:text-[#8C857B]"
+                                        placeholder="Motiu del contacte o proposta de projecte" required>
                                 </div>
 
-                               
-                                <div class="form-group flex flex-col gap-1.5">
+                                <div class="flex flex-col gap-1.5">
                                     <label for="contact-message"
-                                        class="form-label text-xs font-mono font-semibold uppercase tracking-wider text-[#8C857B]"
+                                        class="text-xs font-mono font-semibold uppercase tracking-wider text-[#8C857B]"
                                         data-i18n="contact.message_label">Missatge</label>
                                     <textarea id="contact-message" name="missatge"
-                                        class="form-textarea w-full bg-[#F4F1EC] border border-[#DAD3C6] rounded-xl p-3 text-sm font-mono text-[#2C2825] focus:bg-[#FFFFFF] focus:border-[#2C2825] transition"
+                                        class="w-full bg-[#F4F1EC] border border-[#DAD3C6] rounded-xl p-3 text-sm font-mono text-[#2C2825] focus:outline-none focus:bg-[#FFFFFF] focus:border-[#2C2825] transition placeholder:text-[#8C857B] resize-none"
                                         rows="4" placeholder="Escriu aquí el teu missatge..." required></textarea>
                                 </div>
 
-                                >
-                                <button type="submit"
-                                    class="form-submit-btn inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#2C2825] text-[#FFFFFF] hover:bg-[#CFC7B8] hover:text-[#2C2825] active:scale-95 border border-[#2C2825] hover:border-[#DAD3C6] rounded-xl font-bold font-mono text-sm transition-all shadow-xs cursor-pointer mt-2">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
-                                    </svg>
+                                <!-- Missatge d'estat (ocult per defecte) -->
+                                <p id="contact-status" class="text-xs font-mono font-semibold hidden"></p>
+
+                                <button type="submit" id="contact-submit"
+                                    class="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#2C2825] text-[#FFFFFF] hover:bg-[#CFC7B8] hover:text-[#2C2825] active:scale-95 border border-[#2C2825] hover:border-[#DAD3C6] rounded-xl font-bold font-mono text-sm transition-all shadow-xs cursor-pointer mt-2">
+                                    <i class="fa-solid fa-paper-plane w-4 h-4"></i>
                                     <span data-i18n="contact.send_btn">Enviar missatge</span>
                                 </button>
                             </form>
                         </div>
-                    </article> -->
+                    </article>
                 </div>
             </div>
         </section>

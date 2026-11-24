@@ -125,29 +125,72 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Manejo del formulario de contacto
+  // Manejo del formulario de contacto amb Formspree (fetch asíncron + validació HTML5)
   const contactForm = document.getElementById('contact-form');
   if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
+    contactForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const submitBtn = contactForm.querySelector('.form-submit-btn');
-      const originalText = submitBtn ? submitBtn.innerHTML : '';
 
-      if (submitBtn) {
-        submitBtn.innerHTML = '<span>✓ Missatge enviat correctament!</span>';
-        submitBtn.style.background = '#CFC7B8';
-        submitBtn.style.color = '#2C2825';
-        submitBtn.disabled = true;
+      // HTML5 constraint validation
+      if (!contactForm.checkValidity()) {
+        contactForm.reportValidity();
+        return;
       }
 
-      setTimeout(() => {
-        contactForm.reset();
-        if (submitBtn) {
-          submitBtn.innerHTML = originalText;
-          submitBtn.style.background = '';
-          submitBtn.disabled = false;
+      const submitBtn   = document.getElementById('contact-submit');
+      const statusEl    = document.getElementById('contact-status');
+      const originalHTML = submitBtn ? submitBtn.innerHTML : '';
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i><span>Enviant…</span>';
+      }
+
+      try {
+        const formData = new FormData(contactForm);
+        const response = await fetch(contactForm.action, {
+          method:  'POST',
+          body:    formData,
+          headers: { 'Accept': 'application/json' },
+        });
+
+        if (response.ok) {
+          contactForm.reset();
+          if (statusEl) {
+            statusEl.textContent = '✓ Missatge enviat correctament!';
+            statusEl.className   = 'text-xs font-mono font-semibold text-emerald-700';
+            statusEl.classList.remove('hidden');
+          }
+          if (submitBtn) {
+            submitBtn.innerHTML = '<i class="fa-solid fa-check"></i><span>Enviat!</span>';
+            submitBtn.style.background = '#CFC7B8';
+            submitBtn.style.color = '#2C2825';
+          }
+          setTimeout(() => {
+            if (statusEl) statusEl.classList.add('hidden');
+            if (submitBtn) {
+              submitBtn.innerHTML = originalHTML;
+              submitBtn.style.background = '';
+              submitBtn.style.color = '';
+              submitBtn.disabled = false;
+            }
+          }, 4000);
+        } else {
+          const data = await response.json().catch(() => ({}));
+          throw new Error(data.error || `HTTP ${response.status}`);
         }
-      }, 3500);
+      } catch (err) {
+        console.error('Contact form error:', err);
+        if (statusEl) {
+          statusEl.textContent = `✗ Error en enviar. ${err.message}`;
+          statusEl.className   = 'text-xs font-mono font-semibold text-red-700';
+          statusEl.classList.remove('hidden');
+        }
+        if (submitBtn) {
+          submitBtn.disabled  = false;
+          submitBtn.innerHTML = originalHTML;
+        }
+      }
     });
   }
 
@@ -398,4 +441,7 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
   });
 });
+
+
+
 

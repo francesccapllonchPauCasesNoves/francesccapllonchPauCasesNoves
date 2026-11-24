@@ -286,6 +286,18 @@ body.no-scroll {
   }
 }
 
+@media (max-width: 900px) {
+  .project-card {
+    flex: 0 0 calc((100% - 24px) / 2);
+  }
+}
+
+@media (max-width: 600px) {
+  .project-card {
+    flex: 0 0 100%;
+  }
+}
+
 /* Tarjetas de Información */
 .contact-cards-group {
   display: flex;
@@ -486,10 +498,29 @@ body.no-scroll {
   -webkit-overflow-scrolling: touch;
 }
 
+.projects-track {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none; /* Oculta scrollbar en Firefox */
+}
+
+.projects-track::-webkit-scrollbar {
+  display: none; /* Oculta scrollbar en Chrome/Safari */
+}
+
 .project-card {
+  /* 3 columnas exactas descontando los 2 gaps de 24px */
+  flex: 0 0 calc((100% - 48px) / 3);
   scroll-snap-align: start;
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease, border-color 0.35s ease;
-  will-change: transform;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .slider-dot {
@@ -510,4 +541,33 @@ body.no-scroll {
 .slider-dot.active {
   width: 1.75rem;
   background-color: var(--color-primary);
+}
+
+/* ========================================================
+   GITHUB REPOS GRID — dynamic cards rendered by api.js
+   ======================================================== */
+#github-repos-grid .line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ========================================================
+   CONTACT FORM — focus ring & input reset
+   ======================================================== */
+#contact-form input,
+#contact-form textarea {
+  outline: none;
+}
+#contact-form input:focus,
+#contact-form textarea:focus {
+  box-shadow: 0 0 0 2px rgba(44, 40, 37, 0.15);
+}
+
+/* ========================================================
+   FLAG-ICONS — ensure correct sizing inside flex rows
+   ======================================================== */
+.fi {
+  line-height: 1;
 }
