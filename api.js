@@ -91,6 +91,8 @@ function buildSliderCard(repo) {
   const candidates = [
     `img/${name}.jpg`,
     `img/${name}.png`,
+    `img/${name}.webp`,
+    `img/default.png`,
     `img/default.jpg`
   ];
   let candidateIdx = 0;
