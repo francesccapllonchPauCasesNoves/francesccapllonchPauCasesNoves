@@ -13,7 +13,7 @@
     <script src="script.js" defer></script>
     <script src="terminal.js" defer></script>
     <script src="animacionInicial.js"> </script>
-    <script src="api.js"></script>
+    <script src="api.js" defer></script>
     <script src="cardsInitializer.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -765,7 +765,6 @@
                                 </div>
                             </article>
 
-                            <!-- Tarjeta Redes Sociales -->
                             <article
                                 class="p-4 bg-[#F4F1EC] rounded-2xl border border-[#DAD3C6] flex flex-col gap-2.5 transition-all duration-300 hover:-translate-y-0.5">
                                 <div class="flex items-center gap-3.5">
@@ -814,7 +813,9 @@
                         </div>
                     </aside>
 
-                    <!-- Columna 2: Formulari de Contacte (7 cols) — Formspree -->
+                    <!-- 
+                    Formulario de enviar mails en prueba
+                    
                     <article
                         class="lg:col-span-7 bg-[#FFFFFF] p-7 sm:p-9 lg:p-10 rounded-3xl border border-[#DAD3C6] shadow-sm relative overflow-hidden flex flex-col justify-between h-full">
                         <span
@@ -827,7 +828,6 @@
                                     Message</h3>
                             </div>
 
-                            <!-- action apunta a Formspree — canvia YOUR_FORM_ID pel teu id real -->
                             <form id="contact-form" class="flex flex-col gap-4"
                                 action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
 
@@ -867,7 +867,6 @@
                                         rows="4" placeholder="Escriu aquí el teu missatge..." required></textarea>
                                 </div>
 
-                                <!-- Missatge d'estat (ocult per defecte) -->
                                 <p id="contact-status" class="text-xs font-mono font-semibold hidden"></p>
 
                                 <button type="submit" id="contact-submit"
@@ -877,7 +876,7 @@
                                 </button>
                             </form>
                         </div>
-                    </article>
+                    </article> -->
                 </div>
             </div>
         </section>

@@ -512,8 +512,6 @@ body.no-scroll {
 }
 
 .project-card {
-  /* 3 columnas exactas descontando los 2 gaps de 24px */
-  flex: 0 0 calc((100% - 48px) / 3);
   scroll-snap-align: start;
   background: #ffffff;
   border-radius: 16px;

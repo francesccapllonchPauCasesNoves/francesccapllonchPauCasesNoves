@@ -137,8 +137,8 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      const submitBtn   = document.getElementById('contact-submit');
-      const statusEl    = document.getElementById('contact-status');
+      const submitBtn = document.getElementById('contact-submit');
+      const statusEl = document.getElementById('contact-status');
       const originalHTML = submitBtn ? submitBtn.innerHTML : '';
 
       if (submitBtn) {
@@ -149,8 +149,8 @@ document.addEventListener('DOMContentLoaded', () => {
       try {
         const formData = new FormData(contactForm);
         const response = await fetch(contactForm.action, {
-          method:  'POST',
-          body:    formData,
+          method: 'POST',
+          body: formData,
           headers: { 'Accept': 'application/json' },
         });
 
@@ -158,7 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
           contactForm.reset();
           if (statusEl) {
             statusEl.textContent = '✓ Missatge enviat correctament!';
-            statusEl.className   = 'text-xs font-mono font-semibold text-emerald-700';
+            statusEl.className = 'text-xs font-mono font-semibold text-emerald-700';
             statusEl.classList.remove('hidden');
           }
           if (submitBtn) {
@@ -183,11 +183,11 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error('Contact form error:', err);
         if (statusEl) {
           statusEl.textContent = `✗ Error en enviar. ${err.message}`;
-          statusEl.className   = 'text-xs font-mono font-semibold text-red-700';
+          statusEl.className = 'text-xs font-mono font-semibold text-red-700';
           statusEl.classList.remove('hidden');
         }
         if (submitBtn) {
-          submitBtn.disabled  = false;
+          submitBtn.disabled = false;
           submitBtn.innerHTML = originalHTML;
         }
       }
@@ -223,80 +223,110 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!slider) return;
 
-    const cards = slider.querySelectorAll('.project-card');
-    if (cards.length === 0) return;
+    const getCards = () => slider.querySelectorAll('.project-card');
 
-    // Calcular el desplazamiento por tarjeta
-    const getCardStep = () => {
+    // How many cards are visible at once (3 on lg, 2 on md, 1 on mobile)
+    const getCardsPerPage = () => {
+      const w = window.innerWidth;
+      if (w >= 1024) return 3;
+      if (w >= 768) return 2;
+      return 1;
+    };
+
+    const getCardStep = (cards) => {
       if (cards.length > 1) {
         return cards[1].offsetLeft - cards[0].offsetLeft;
       }
-      return cards[0].offsetWidth + 24;
+      return cards.length === 1 ? cards[0].offsetWidth + 24 : 300;
     };
 
-    // Crear o actualizar los indicadores de paginación
+    // Scroll step = width of one full page of cards
+    const getPageStep = () => {
+      const cards = getCards();
+      return getCardStep(cards) * getCardsPerPage();
+    };
+
+    // Exact number of slides of N cards (including partial/odd last slide)
+    const getTotalPages = () => {
+      const cards = getCards();
+      if (cards.length === 0) return 0;
+      return Math.ceil(cards.length / getCardsPerPage());
+    };
+
+    // Current active page index
+    const getCurrentPage = () => {
+      const cards = getCards();
+      const totalPages = getTotalPages();
+      if (totalPages <= 1) return 0;
+
+      const maxScroll = slider.scrollWidth - slider.clientWidth;
+      if (slider.scrollLeft <= 10) return 0;
+      if (slider.scrollLeft >= maxScroll - 10) return totalPages - 1;
+
+      const cpp = getCardsPerPage();
+      const cardStep = getCardStep(cards);
+      const activeCard = Math.round(slider.scrollLeft / (cardStep || 1));
+      return Math.min(totalPages - 1, Math.floor(activeCard / cpp));
+    };
+
+    // Render one dot per page (ceil(totalCards / cardsPerPage))
     const renderDots = () => {
       if (!dotsContainer) return;
       dotsContainer.innerHTML = '';
+      const cards = getCards();
+      const total = getTotalPages();
+      const activePage = getCurrentPage();
 
-      cards.forEach((_, idx) => {
+      for (let page = 0; page < total; page++) {
         const dot = document.createElement('button');
-        dot.className = `slider-dot ${idx === 0 ? 'active' : ''}`;
+        dot.className = `slider-dot ${page === activePage ? 'active' : ''}`;
         dot.setAttribute('type', 'button');
-        dot.setAttribute('aria-label', `Anar al projecte ${idx + 1}`);
+        dot.setAttribute('aria-label', `Anar a la pàgina ${page + 1}`);
         dot.addEventListener('click', () => {
-          const targetOffset = cards[idx].offsetLeft - slider.offsetLeft;
-          slider.scrollTo({ left: targetOffset, behavior: 'smooth' });
-        });
-        dotsContainer.appendChild(dot);
-      });
-    };
-
-    // Actualizar estado de dots y botones de flecha
-    const updateSliderControls = () => {
-      const step = getCardStep();
-      const scrollPos = slider.scrollLeft;
-      const activeIdx = Math.min(
-        cards.length - 1,
-        Math.max(0, Math.round(scrollPos / (step || 1)))
-      );
-
-      // Actualizar dots
-      if (dotsContainer) {
-        const dots = dotsContainer.querySelectorAll('.slider-dot');
-        dots.forEach((dot, idx) => {
-          if (idx === activeIdx) {
-            dot.classList.add('active');
-          } else {
-            dot.classList.remove('active');
+          const cpp = getCardsPerPage();
+          const firstIdx = page * cpp;
+          const targetCard = cards[Math.min(firstIdx, cards.length - 1)];
+          if (targetCard) {
+            slider.scrollTo({ left: targetCard.offsetLeft - slider.offsetLeft, behavior: 'smooth' });
           }
         });
-      }
-
-      // Actualizar botones prev/next
-      const maxScroll = slider.scrollWidth - slider.clientWidth;
-      if (prevBtn) {
-        prevBtn.disabled = scrollPos <= 10;
-      }
-      if (nextBtn) {
-        nextBtn.disabled = scrollPos >= maxScroll - 10;
+        dotsContainer.appendChild(dot);
       }
     };
 
-    renderDots();
-    updateSliderControls();
+    // Sync dots and arrow buttons to current scroll position
+    const updateSliderControls = () => {
+      const activePage = getCurrentPage();
+
+      if (dotsContainer) {
+        dotsContainer.querySelectorAll('.slider-dot').forEach((dot, idx) => {
+          dot.classList.toggle('active', idx === activePage);
+        });
+      }
+
+      const maxScroll = slider.scrollWidth - slider.clientWidth;
+      if (prevBtn) prevBtn.disabled = slider.scrollLeft <= 10;
+      if (nextBtn) nextBtn.disabled = maxScroll <= 10 || slider.scrollLeft >= maxScroll - 10;
+    };
+
+    const refresh = () => {
+      renderDots();
+      updateSliderControls();
+    };
+
+    refresh();
+
+    window.addEventListener('resize', refresh, { passive: true });
 
     if (prevBtn) {
       prevBtn.addEventListener('click', () => {
-        const step = getCardStep();
-        slider.scrollBy({ left: -step, behavior: 'smooth' });
+        slider.scrollBy({ left: -getPageStep(), behavior: 'smooth' });
       });
     }
 
     if (nextBtn) {
       nextBtn.addEventListener('click', () => {
-        const step = getCardStep();
-        slider.scrollBy({ left: step, behavior: 'smooth' });
+        slider.scrollBy({ left: getPageStep(), behavior: 'smooth' });
       });
     }
 
@@ -306,11 +336,7 @@ document.addEventListener('DOMContentLoaded', () => {
       scrollTimeout = requestAnimationFrame(updateSliderControls);
     }, { passive: true });
 
-    window.addEventListener('resize', () => {
-      updateSliderControls();
-    }, { passive: true });
-
-    // Soporte para Mouse Drag (arrastre con ratón en escritorio)
+    // Mouse drag support
     let isDown = false;
     let startX = 0;
     let scrollStart = 0;
@@ -344,28 +370,23 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       const currentX = e.pageX - slider.offsetLeft;
       const walk = (currentX - startX) * 1.3;
-      if (Math.abs(walk) > 4) {
-        hasDragged = true;
-      }
+      if (Math.abs(walk) > 4) hasDragged = true;
       slider.scrollLeft = scrollStart - walk;
     });
 
-    // Evitar que el click en los enlaces se active si el usuario estuvo arrastrando
-    slider.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', (e) => {
-        if (hasDragged) {
-          e.preventDefault();
-          e.stopPropagation();
-          hasDragged = false;
-        }
-      });
+    // Prevent link clicks firing after a drag (delegated so dynamic cards work too)
+    slider.addEventListener('click', (e) => {
+      if (hasDragged && e.target.closest('a')) {
+        e.preventDefault();
+        e.stopPropagation();
+        hasDragged = false;
+      }
     });
+
+    return refresh;
   };
 
-  initProjectsSlider();
-
-  // Expose a re-init hook so api.js can refresh dots + buttons after appending GitHub cards
-  window.reinitProjectsSlider = initProjectsSlider;
+  window.refreshProjectsSlider = initProjectsSlider();
 });
 
 const track = document.querySelector('.slider');
