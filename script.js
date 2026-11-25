@@ -439,8 +439,33 @@ if (track) {
   });
 }
 
+function fitSectionToViewport(section, headerHeight) {
+  if (!section || window.innerWidth < 1024) return;
+
+  const content = section.firstElementChild;
+  if (!content) return;
+
+  section.style.minHeight = `calc(100dvh - ${headerHeight}px)`;
+  const availableHeight = window.innerHeight - headerHeight;
+  const sectionHeight = section.scrollHeight;
+
+  if (sectionHeight > availableHeight) {
+    content.style.zoom = String((availableHeight - 8) / sectionHeight);
+  }
+}
+
 function setLanguage(lang) {
   if (!translations[lang]) lang = 'en';
+
+  const sections = Array.from(document.querySelectorAll('main > section'));
+  const header = document.getElementById('header');
+  const headerHeight = header?.getBoundingClientRect().height || 0;
+  const activeSection = sections.find(section => section.getBoundingClientRect().bottom > headerHeight);
+
+  sections.forEach(section => {
+    section.style.minHeight = '';
+    if (section.firstElementChild) section.firstElementChild.style.zoom = '';
+  });
 
   document.documentElement.lang = lang;
 
@@ -454,6 +479,15 @@ function setLanguage(lang) {
   });
 
   localStorage.setItem('lang', lang);
+  sections.forEach(section => fitSectionToViewport(section, headerHeight));
+
+  if (activeSection) {
+    const scrollTop = activeSection.getBoundingClientRect().top + window.scrollY - headerHeight;
+    const previousScrollBehavior = document.documentElement.style.scrollBehavior;
+    document.documentElement.style.scrollBehavior = 'auto';
+    window.scrollTo(0, scrollTop);
+    document.documentElement.style.scrollBehavior = previousScrollBehavior;
+  }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
