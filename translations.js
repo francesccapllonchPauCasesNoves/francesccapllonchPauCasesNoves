@@ -7,6 +7,7 @@ const translations = {
     "nav.about": "Sobre mi",
     "nav.skills": "Skills i Formació",
     "nav.projects": "Projectes",
+    "projects.view": "Veure projecte",
     "nav.contact": "Contacte",
 
     // Portada
@@ -81,6 +82,7 @@ const translations = {
     "nav.about": "Sobre mí",
     "nav.skills": "Skills y Formación",
     "nav.projects": "Proyectos",
+    "projects.view": "Ver proyecto",
     "nav.contact": "Contacto",
 
     // Portada
@@ -155,6 +157,7 @@ const translations = {
     "nav.about": "About Me",
     "nav.skills": "Skills & Education",
     "nav.projects": "Projects",
+    "projects.view": "View project",
     "nav.contact": "Contact",
 
     // Hero
