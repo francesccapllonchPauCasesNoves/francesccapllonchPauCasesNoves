@@ -5,11 +5,9 @@
  * inside #projects-slider with a 100% uniform card layout.
  * After injection, refreshes the slider pagination dots & arrows.
  *
- * IMAGE CONVENTION:
- *   1. img/<repo-name>.jpg
- *   2. img/<repo-name>.png
- *   3. img/default.jpg (default image for projects without a specific one)
- *   4. Fallback to styled GitHub placeholder if none exist yet.
+ * MEDIA CONVENTION:
+ *   1. img/<repo-name>.mp4
+ *   2. img/default.png when the video is missing or cannot be played
  */
 
 const GITHUB_USERNAME = 'francesccapllonchPauCasesNoves';
@@ -58,26 +56,67 @@ function getLangIcon(lang) {
   return LANG_ICONS[lang] || LANG_ICONS['default'];
 }
 
-function createPlaceholderLink(url) {
-  const el = document.createElement('a');
-  el.href = url;
-  el.target = '_blank';
-  el.rel = 'noopener noreferrer';
-  el.className = 'block overflow-hidden rounded-2xl border border-[#DAD3C6] bg-[#E8E2D8] aspect-[16/10] w-full flex flex-col items-center justify-center gap-2';
-  el.innerHTML = `
-    <i class="fa-brands fa-github text-4xl text-[#8C857B]"></i>
-    <span class="text-[10px] font-mono text-[#8C857B] tracking-wider uppercase">
-      github.com/${GITHUB_USERNAME}
-    </span>`;
-  return el;
-}
-
 function getViewProjectLabel() {
   const lang = document.documentElement.lang || localStorage.getItem('lang') || 'ca';
   if (typeof translations !== 'undefined' && translations[lang] && translations[lang]['projects.view']) {
     return translations[lang]['projects.view'];
   }
   return 'Veure projecte';
+}
+
+function openProjectPreview(card) {
+  const dialog = document.createElement('dialog');
+  dialog.className = 'project-preview-dialog';
+
+  const expandedCard = card.cloneNode(true);
+  expandedCard.className = 'project-card project-preview-card';
+
+  const sourceVideo = card.querySelector('video');
+  const previewVideo = expandedCard.querySelector('video');
+  if (sourceVideo && previewVideo) {
+    sourceVideo.pause();
+    previewVideo.controls = true;
+    previewVideo.preload = 'auto';
+    previewVideo.addEventListener('loadedmetadata', () => {
+      if (Number.isFinite(sourceVideo.currentTime) && previewVideo.duration) {
+        previewVideo.currentTime = Math.min(sourceVideo.currentTime, previewVideo.duration - 0.1);
+      }
+      previewVideo.play().catch(() => {});
+    }, { once: true });
+  }
+
+  const closeButton = document.createElement('button');
+  closeButton.type = 'button';
+  closeButton.className = 'project-preview-close';
+  closeButton.setAttribute('aria-label', 'Tancar vista ampliada');
+  closeButton.innerHTML = '<i class="fa-solid fa-xmark" aria-hidden="true"></i>';
+
+  dialog.append(closeButton, expandedCard);
+  document.body.appendChild(dialog);
+
+  const closeDialog = () => dialog.close();
+  closeButton.addEventListener('click', closeDialog);
+  dialog.addEventListener('cancel', (event) => {
+    event.preventDefault();
+    closeDialog();
+  });
+  dialog.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      closeDialog();
+    }
+  });
+  dialog.addEventListener('click', (event) => {
+    if (event.target === dialog) closeDialog();
+  });
+  dialog.addEventListener('close', () => {
+    previewVideo?.pause();
+    if (sourceVideo?.isConnected) sourceVideo.play().catch(() => {});
+    dialog.remove();
+    card.focus({ preventScroll: true });
+  }, { once: true });
+
+  dialog.showModal();
 }
 
 function buildSliderCard(repo) {
@@ -93,40 +132,36 @@ function buildSliderCard(repo) {
     'w-full sm:w-[calc(85%)] md:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)] ' +
     'snap-start flex flex-col gap-4 bg-[#FFFFFF] p-6 rounded-3xl ' +
     'border border-[#DAD3C6] shadow-sm transition-all duration-300 ' +
-    'hover:-translate-y-1.5 hover:shadow-md hover:border-[#CFC7B8] relative overflow-hidden';
+    'hover:-translate-y-1.5 hover:shadow-md hover:border-[#CFC7B8] relative overflow-hidden cursor-zoom-in';
+  article.tabIndex = 0;
+  article.setAttribute('aria-haspopup', 'dialog');
+  article.setAttribute('aria-label', `Ampliar vista previa de ${name}`);
 
   const imgLink = document.createElement('a');
   imgLink.href = url;
   imgLink.target = '_blank';
   imgLink.rel = 'noopener noreferrer';
-  imgLink.className = 'block overflow-hidden rounded-2xl border border-[#DAD3C6] bg-[#E8E2D8]';
+  imgLink.className = 'project-media-link block overflow-hidden rounded-2xl border border-[#DAD3C6] bg-[#E8E2D8]';
 
-  const img = document.createElement('img');
-  img.alt = `${name} screenshot`;
-  img.className = 'aspect-[16/10] w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]';
-  img.draggable = false;
-
-  const candidates = [
-    `img/${name}.jpg`,
-    `img/${name}.png`,
-    `img/${name}.webp`,
-    `img/default.png`,
-    `img/default.jpg`
-  ];
-  let candidateIdx = 0;
-
-  img.onerror = () => {
-    candidateIdx++;
-    if (candidateIdx < candidates.length) {
-      img.src = candidates[candidateIdx];
-    } else {
-      img.onerror = null;
-      imgLink.replaceWith(createPlaceholderLink(url));
-    }
+  const mediaClass = 'aspect-[16/10] w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]';
+  const video = document.createElement('video');
+  video.className = mediaClass;
+  video.autoplay = true;
+  video.muted = true;
+  video.loop = true;
+  video.playsInline = true;
+  video.preload = 'metadata';
+  video.setAttribute('aria-label', `${name} project preview`);
+  video.onerror = () => {
+    const img = document.createElement('img');
+    img.src = 'img/default.png';
+    img.alt = `${name} project preview`;
+    img.className = mediaClass;
+    img.draggable = false;
+    video.replaceWith(img);
   };
-
-  img.src = candidates[candidateIdx];
-  imgLink.appendChild(img);
+  video.src = `img/${encodeURIComponent(name)}.mp4`;
+  imgLink.appendChild(video);
   article.appendChild(imgLink);
 
   // Uniform middle block across all cards
@@ -177,5 +212,28 @@ async function fetchGitHubRepos() {
     }
   }
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  const slider = document.getElementById('projects-slider');
+  if (!slider) return;
+
+  slider.addEventListener('click', (event) => {
+    const card = event.target.closest('.project-card');
+    if (!card) return;
+
+    const link = event.target.closest('a');
+    if (link && !link.classList.contains('project-media-link')) return;
+    if (link) event.preventDefault();
+    openProjectPreview(card);
+  });
+
+  slider.addEventListener('keydown', (event) => {
+    if (event.key !== 'Enter' && event.key !== ' ') return;
+    const card = event.target.closest('.project-card');
+    if (!card || event.target.closest('a')) return;
+    event.preventDefault();
+    openProjectPreview(card);
+  });
+});
 
 document.addEventListener('DOMContentLoaded', fetchGitHubRepos);
