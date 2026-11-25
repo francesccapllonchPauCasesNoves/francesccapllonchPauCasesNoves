@@ -19,7 +19,7 @@ const translations = {
     // Sobre mi
     "about.title": "Sobre mi",
     "about.text":
-      "Sóc un estudiant de Desenvolupament d'Aplicacions Multiplataforma a Mallorca, amb moltes ganes d'aprendre programació i ciberseguretat. Faig molt d'esport, la majoria relacionat amb la vela, però el meu preferit és el kitesurf. Fa més de 2 anys que sóc monitor de kitesurf, allà he millorat el meu coneixement d'anglès i de tractar amb els clients.",
+      "Sóc un estudiant de Desenvolupament d'Aplicacions Multiplataforma a Mallorca, amb moltes ganes d'aprendre programació i <strong>ciberseguretat</strong>. Faig molt d'esport, la majoria relacionat amb la vela, però el meu preferit és el kitesurf. Fa més de 2 anys que sóc monitor de kitesurf, allà he millorat el meu coneixement d'anglès i de tractar amb els clients.",
 
     // Habilitats
     "skills_section.title": "Habilitats i Formació",
@@ -93,7 +93,7 @@ const translations = {
     // Sobre mí
     "about.title": "Sobre mí",
     "about.text":
-      "Soy un estudiante de Desarrollo de Aplicaciones Multiplataforma en Mallorca, con muchas ganas de aprender programación y ciberseguridad. Hago mucho deporte, la mayoría relacionado con la vela, pero mi favorito es el kitesurf. Llevo más de 2 años como monitor de kitesurf, allí mejore mi nivel inglés y mi manera de tratar con los clientes.",
+      "Soy un estudiante de Desarrollo de Aplicaciones Multiplataforma en Mallorca, con muchas ganas de aprender programación y <strong>ciberseguridad</strong>. Hago mucho deporte, la mayoría relacionado con la vela, pero mi favorito es el kitesurf. Llevo más de 2 años como monitor de kitesurf, allí mejore mi nivel inglés y mi manera de tratar con los clientes.",
 
     // Habilidades
     "skills_section.title": "Habilidades y Formación",
