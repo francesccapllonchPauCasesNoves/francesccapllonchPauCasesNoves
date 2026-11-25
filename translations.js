@@ -11,7 +11,7 @@ const translations = {
 
     // Portada
     "hero.title": "Benvingut al meu portfoli!",
-    "hero.subtitle": "Pots usar aquesta consola per obtenir informació del meu perfil! Escriu ordres o prem els botons d'accés ràpid.",
+    "hero.subtitle": "Pots usar aquesta consola per obtenir informació del meu perfil! Escriu ordres o polsa els botons d'accés ràpid.",
 
     //Scroll
     "hero.scroll_down": "Desplaça't cap avall per veure més informació",
@@ -19,7 +19,7 @@ const translations = {
     // Sobre mi
     "about.title": "Sobre mi",
     "about.text":
-      "Sóc estudiant de Desenvolupament d'Aplicacions Multiplataforma a Mallorca, amb moltes ganes d'aprendre informàtica i programació. Faig molt d'esport, la majoria relacionat amb la vela, però el meu preferit és el kitesurf. Fa més de 2 anys que sóc monitor de kitesurf, i allà vaig millorar la meva manera d'explicar-me en anglès i de tractar amb els clients.",
+      "Sóc un estudiant de Desenvolupament d'Aplicacions Multiplataforma a Mallorca, amb moltes ganes d'aprendre programació i ciberseguretat. Faig molt d'esport, la majoria relacionat amb la vela, però el meu preferit és el kitesurf. Fa més de 2 anys que sóc monitor de kitesurf, allà he millorat el meu coneixement d'anglès i de tractar amb els clients.",
 
     // Habilitats
     "skills_section.title": "Habilitats i Formació",
@@ -59,13 +59,6 @@ const translations = {
     "lang.es": "Castellà - Llengua materna",
     "lang.ca": "Català - Llengua materna",
 
-    // Projectes
-    "projects.title": "Projectes",
-    "projects.view": "Veure projecte",
-    "project.1.title": "ECO RIDE: projecte d'exemple en Dart",
-    "project.2.title": "LOG FILTER (amb Java)",
-    "project.3.title": "EXEMPLE DE FLUTTER",
-
     // Contacte
     "contact.title": "Contacte",
     "contact.intro": "Tens algun projecte en ment o vols posar-te en contacte? Envia'm un missatge.",
@@ -100,7 +93,7 @@ const translations = {
     // Sobre mí
     "about.title": "Sobre mí",
     "about.text":
-      "Soy estudiante de Desarrollo de Aplicaciones Multiplataforma en Mallorca, con muchas ganas de aprender informática y programación. Hago mucho deporte, la mayoría relacionado con la vela, pero mi favorito es el kitesurf. Llevo más de 2 años como monitor de kitesurf, y allí mejoré mi forma de expresarme en inglés y de tratar con los clientes.",
+      "Soy un estudiante de Desarrollo de Aplicaciones Multiplataforma en Mallorca, con muchas ganas de aprender programación y ciberseguridad. Hago mucho deporte, la mayoría relacionado con la vela, pero mi favorito es el kitesurf. Llevo más de 2 años como monitor de kitesurf, allí mejore mi nivel inglés y mi manera de tratar con los clientes.",
 
     // Habilidades
     "skills_section.title": "Habilidades y Formación",
@@ -140,13 +133,6 @@ const translations = {
     "lang.es": "Español - Lengua materna",
     "lang.ca": "Catalán - Lengua materna",
 
-    // Proyectos
-    "projects.title": "Proyectos",
-    "projects.view": "Ver proyecto",
-    "project.1.title": "ECO RIDE: proyecto de ejemplo en Dart",
-    "project.2.title": "LOG FILTER (con Java)",
-    "project.3.title": "EJEMPLO DE FLUTTER",
-
     // Contacto
     "contact.title": "Contacto",
     "contact.intro": "¿Tienes algún proyecto en mente o quieres ponerte en contacto? Envíame un mensaje.",
@@ -181,7 +167,7 @@ const translations = {
     // About me
     "about.title": "About Me",
     "about.text":
-      "I am a student, currently studying Multiplatform Application Development in Mallorca, with a great desire to learn IT and programming. I do a lot of sports, most of them related to sailing, but my favorite is kitesurfing. I have been a kitesurf instructor for more than 2 years, where I improved how to explain myself in English and how to deal with customers.",
+      "I am a student, currently studying Multiplatform Application Development in Mallorca, with a great desire to programming and <strong>cybersecurity</strong>. I do a lot of sports, most of them related to sailing, but my favorite is kitesurfing. I have been a kitesurf instructor for more than 2 years, there, I improved my English level and how to deal with customers.",
 
     // Skills
     "skills_section.title": "Skills & Education",
@@ -220,13 +206,6 @@ const translations = {
     "lang.en": "English - Medium Level",
     "lang.es": "Spanish - Native",
     "lang.ca": "Catalan - Native",
-
-    // Projects
-    "projects.title": "Projects",
-    "projects.view": "View project",
-    "project.1.title": "ECO RIDE: Dart example project",
-    "project.2.title": "LOG FILTER (with Java)",
-    "project.3.title": "FLUTTER EXAMPLE",
 
     // Contact
     "contact.title": "Contact",

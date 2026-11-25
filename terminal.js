@@ -233,7 +233,7 @@
     const current = terminalInput.value.trim().toLowerCase();
     if (!current) return;
 
-    const available = ['help', 'about', 'projects', 'skills', 'neofetch', 'fetch', 'contact', 'clear', 'theme', 'whoami', 'date', 'sudo'];
+    const available = ['help', 'about', 'projects', 'skills', 'neofetch', 'fetch', 'contact', 'clear', 'whoami', 'date', 'sudo'];
     const matches = available.filter(c => c.startsWith(current));
 
     if (matches.length === 1) {
@@ -603,18 +603,19 @@
    * COMANDO: theme (alterna esquemas de color)
    */
   function cycleTheme() {
-    themes.forEach(t => {
-      if (t) terminalWindow.classList.remove(t);
-    });
+    printOutput(`<div class= "term-error"> 🚨 Error: El cambio de temas no esta disponible ahora mismo! </div>`);
+    // themes.forEach(t => {
+    //   if (t) terminalWindow.classList.remove(t);
+    // });
 
-    activeThemeIndex = (activeThemeIndex + 1) % themes.length;
-    const nextTheme = themes[activeThemeIndex];
-    if (nextTheme) {
-      terminalWindow.classList.add(nextTheme);
-    }
+    // activeThemeIndex = (activeThemeIndex + 1) % themes.length;
+    // const nextTheme = themes[activeThemeIndex];
+    // if (nextTheme) {
+    //   terminalWindow.classList.add(nextTheme);
+    // }
 
-    const themeNames = ['Warm Sand & Linen (Default)', 'Sandstone Focus', 'Pure Minimalist'];
-    printOutput(`<div class="term-success">Esquema de color cambiado a: <span class="font-bold">${themeNames[activeThemeIndex]}</span></div>`);
+    // const themeNames = ['Warm Sand & Linen (Default)', 'Sandstone Focus', 'Pure Minimalist'];
+    // printOutput(`<div class="term-success">Esquema de color cambiado a: <span class="font-bold">${themeNames[activeThemeIndex]}</span></div>`);
   }
 
   /**
